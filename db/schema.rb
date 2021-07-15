@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_15_001912) do
+ActiveRecord::Schema.define(version: 2021_07_15_093300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,5 +36,57 @@ ActiveRecord::Schema.define(version: 2021_07_15_001912) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "forecast_results", force: :cascade do |t|
+    t.text "result"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "parameters", force: :cascade do |t|
+    t.text "weather_parameter"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "search_parameters", force: :cascade do |t|
+    t.bigint "weather_search_id", null: false
+    t.bigint "parameter_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["parameter_id"], name: "index_search_parameters_on_parameter_id"
+    t.index ["weather_search_id"], name: "index_search_parameters_on_weather_search_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "username"
+    t.string "first_name"
+    t.string "last_name"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "weather_searches", force: :cascade do |t|
+    t.string "start_time"
+    t.string "end_time"
+    t.string "frecuency"
+    t.bigint "user_id", null: false
+    t.bigint "forecast_result_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["forecast_result_id"], name: "index_weather_searches_on_forecast_result_id"
+    t.index ["user_id"], name: "index_weather_searches_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "search_parameters", "parameters"
+  add_foreign_key "search_parameters", "weather_searches"
+  add_foreign_key "weather_searches", "forecast_results"
+  add_foreign_key "weather_searches", "users"
 end

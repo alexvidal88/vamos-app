@@ -21,6 +21,8 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 gem 'cloudinary', '~> 1.16.0'
+
+gem 'devise'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'simple_form'
 # Use Active Storage variant

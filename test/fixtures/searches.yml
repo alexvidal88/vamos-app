@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_time: MyString
+  end_time: MyString
+  frecuency: MyString
+  user_id: one
+  forecast_result_id: one
+
+two:
+  start_time: MyString
+  end_time: MyString
+  frecuency: MyString
+  user_id: two
+  forecast_result_id: two
