@@ -10,12 +10,12 @@ data = File.read('public/user_seeds.json')
 new_users = JSON.parse(data)
 new_users['users'].each do |new_user|
   created_user = User.new(
-    fisrt_name: new_user['fisrt_name'],
-    family_name: new_user['family_name'],
+    first_name: new_user['first_name'],
+    last_name: new_user['last_name'],
     username: new_user['username'],
     email: new_user['email'],
-    user_id: user.id
+    password: '12345678'
   )
-
+  created_user.save!
 end
 

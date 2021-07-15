@@ -1,14 +1,14 @@
 {"users":[
   {
-    "fisrt_name":"Gianluigi",
-    "family_name":"Donnaruma",
+    "first_name":"Gianluigi",
+    "last_name":"Donnaruma",
     "username":"GIGI",
     "email": "gig@gmail.com"
   },
   {
-    "fisrt_name":"Donald",
-    "family_name":"Trump",
+    "first_name":"Donald",
+    "last_name":"Trump",
     "username":"Don Don",
     "email": "donald@whitehouse.net"
-  },
+  }
 ]}
