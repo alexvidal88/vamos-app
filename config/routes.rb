@@ -1,3 +1,9 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  devise_for :users
+  root to: "pages#home"
+
+  resources :forecast_results
+  resources :weather_searches
+  resources :search_parameters
+  resources :parameters
 end
