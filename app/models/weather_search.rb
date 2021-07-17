@@ -18,8 +18,8 @@ class WeatherSearch < ApplicationRecord
     end
   end
 
-  def unavailable_dates
-    @searches.pluck(:start_time, :end_time).map do |range|
+  def unavailable_times
+    search_parameters.pluck(:start_time, :end_time).map do |range|
       { from: range[0], to: range[1] }
     end
   end

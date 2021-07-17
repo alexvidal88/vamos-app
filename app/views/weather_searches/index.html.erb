@@ -3,14 +3,22 @@
 <div class="card sign">
 <%= simple_form_for @search do |f| %>
   <%= f.input :address, label: "address" %>
-  <div id='weather-search-times' data-unavailable="<%= @weather_search.unavailable_dates.to_json %>">
-    <%= f.input :start_time, as: :string, type: :text %>
-    <%= f.input :end_time, as: :string, type: :text %>
-  </div>
   <div class="form-actions text-center m-auto">
     <%= f.submit class: 'btn btn-primary' %>
   </div>
 <% end %>
+</div>
+
+<div class= "sign" id='weather-search-times' data-unavailable="<%= @search.unavailable_times.to_json %>">
+  <% if current_user.id != @search.user_id  %>
+    <%= simple_form_for @search do |f| %>
+       <%= f.input :start_time, as: :string, type: :text %>
+       <%= f.input :end_time, as: :string, type: :text %>
+        <div class="form-actions text-center m-auto">
+          <%= f.submit "Book", class: "btn btn-primary" %>
+        </div>
+    <% end %>
+  <% end %>
 </div>
 
 <div id="map"
