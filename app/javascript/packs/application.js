@@ -9,12 +9,13 @@ require("@rails/activestorage").start()
 require("channels")
 
 import "bootstrap";
-
+// import flatpickr from "flatpickr";
+import { datePicker } from "../plugins/flatpickr";
 import { initMapbox } from '../plugins/init_mapbox';
 import { initAutocomplete } from "../plugins/init_autocomplete";
 
 document.addEventListener('turbolinks:load', () => {
-  // datePicker();
+  datePicker();
   initMapbox();
   initAutocomplete();
   // loadDynamicBannerText();
