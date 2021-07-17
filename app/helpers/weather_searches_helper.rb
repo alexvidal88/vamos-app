@@ -1,0 +1,2 @@
+module WeatherSearchesHelper
+end
