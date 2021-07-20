@@ -1,6 +1,5 @@
 class WeatherSearchesController < ApplicationController
 
-
   def index
     # @searches = WeatherSearch.all
     @url = 'https://api.github.com/users/ssaunier'
@@ -26,6 +25,7 @@ class WeatherSearchesController < ApplicationController
   def show
     @search = WeatherSearch.find(params[:id])
   end
+
 
   private
 

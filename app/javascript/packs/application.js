@@ -15,3 +15,12 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+import "bootstrap";
+import { initAutocomplete } from "../plugins/init_autocomplete";
+
+document.addEventListener('turbolinks:load', () => {
+  // datePicker();
+  // initMapbox();
+  initAutocomplete();
+  // loadDynamicBannerText();
+});
