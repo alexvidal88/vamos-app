@@ -1,0 +1,34 @@
+{"users":[
+  {
+    "first_name":"Gianluigi",
+    "last_name":"Donnaruma",
+    "username":"GIGI",
+    "email":"gig@gmail.com",
+    "search_parameters":[
+      {
+        "start_date":"21.04.2021",
+        "end_date":"24.04.2021",
+        "max_temperature": "25",
+        "min_temperature": "28",
+        "max_wind_speed": "30",
+        "min_wind_speed": "43"
+      }
+    ]
+  },
+  {
+    "first_name":"Donald",
+    "last_name":"Trump",
+    "username":"Don Don",
+    "email": "donald@whitehouse.net",
+    "search_parameters":[
+      {
+        "start_date":"21.04.2021",
+        "end_date":"24.04.2021",
+        "max_temperature": "25",
+        "min_temperature": "28",
+        "max_wind_speed": "30",
+        "min_wind_speed": "43"
+      }
+    ]
+  }
+]}

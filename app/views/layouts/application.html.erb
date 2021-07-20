@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>VamosApp</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+    <title>Vamos App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all' %>
+    <%#= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
   </head>
 
   <body>
-    <%= render 'shared/navbar' %>
-    <%= yield %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <%= render "shared/navbar" %>
     <%= render 'shared/flashes' %>
+    <p class="alert"><%= alert %></p>
+    <%= yield %>
+
   </body>
 </html>
