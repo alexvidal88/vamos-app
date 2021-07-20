@@ -1,11 +1,14 @@
 class WeatherSearchesController < ApplicationController
 
   def index
-    # @searches = WeatherSearch.all
-    @url = 'https://api.github.com/users/ssaunier'
-    @user_serialized = URI.open(@url).read
-    @user = JSON.parse(@user_serialized)
-    # puts "#{@user['name']} - #{@user['bio']}"
+    @searches = WeatherSearch.all
+    # the `geocoded` scope filters only flats with coordinates (latitude & longitude)
+    @markers = @searches.geocoded.map do |search|
+      {
+        lat: search.latitude,
+        lng: search.longitude
+      }
+    end
   end
 
   def new
@@ -30,6 +33,6 @@ class WeatherSearchesController < ApplicationController
   private
 
   def search_params
-    params.require(:weather_search).permit(:start_time, :end_time, :frecuency)
+    params.require(:weather_search).permit(:start_time, :end_time, :frecuency, :address)
   end
 end
