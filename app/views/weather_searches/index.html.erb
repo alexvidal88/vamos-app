@@ -1,10 +1,9 @@
-<h5> <%=  @output["name"] %></h5>
-
 <div class="card sign">
 <%= simple_form_for @search do |f| %>
   <%= f.input :address, label: "address" %>
   <div class="form-actions text-center m-auto">
     <%= f.submit class: 'btn btn-primary' %>
+    <%= f.association :forecast_result %>
   </div>
 <% end %>
 </div>
@@ -26,3 +25,27 @@
      data-markers="<%= @markers.to_json %>"
      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>
+
+
+//World weather online API
+
+<div>
+  <% @searches.each do |search| %>
+    <% @url = "https://api.worldweatheronline.com/premium/v1/ski.ashx?key=c554d8234d824db29ee34354211407&q=#{search.latitude},#{search.longitude}&format=json" %>
+    <% @uri = URI(@url) %>
+    <% @response = Net::HTTP.get(@uri) %>
+    <% @output = JSON.parse(@response) %>
+    <% @output["data"]["weather"].each do |out| %>
+     <% out["bottom"].each do |param| %>
+        <h3> <%= param["maxtempC"] %> </h3>
+     <% end %>
+    <h3> <%= link_to "delete" , search, method: :delete %> </h3>
+     <% end %>
+  <% end  %>
+</div>
+
+
+
+
+
+

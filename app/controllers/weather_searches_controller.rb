@@ -2,16 +2,11 @@
   require 'json'
 
 class WeatherSearchesController < ApplicationController
-
+  before_action :set_weather_search, only: [:show, :destroy]
   def index
-    @url = 'https://api.github.com/users/ssaunier'
-    @uri = URI(@url)
-    @response = Net::HTTP.get(@uri)
-    @output = JSON.parse(@response)
-
     @search = WeatherSearch.new
     @searches = WeatherSearch.all
-    # the `geocoded` scope filters only flats with coordinates (latitude & longitude)
+
     @markers = @searches.geocoded.map do |search|
       {
         lat: search.latitude,
@@ -35,12 +30,22 @@ class WeatherSearchesController < ApplicationController
   end
 
   def show
-    @search = WeatherSearch.find(params[:id])
+    @seach = WeatherSearch.new
+  end
+
+  def destroy
+    @search.user = current_user
+    @search.destroy
+    redirect_to weather_searches_path
   end
 
   private
 
   def search_params
     params.require(:weather_search).permit(:start_time, :end_time, :frecuency, :address)
+  end
+
+  def set_weather_search
+    @search = WeatherSearch.find(params[:id])
   end
 end

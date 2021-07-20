@@ -13,11 +13,13 @@ const datePicker = () => {
 
   flatpickr(startDateInput, {
     minDate: "today",
+    maxDate: new Date().fp_incr(14),
     disable: unavailableDates,
-    dateFormat: "Y-m-d",
+    enableTime: true,
+    // noCalendar: true,
+    dateFormat: "Y-m-d H:i",
+    // time_24hr: true
   });
-
-  console.log('im in the file')
 
   startDateInput.addEventListener("change", (e) => {
     if (startDateInput != "") {
@@ -25,8 +27,12 @@ const datePicker = () => {
     }
     flatpickr(endDateInput, {
       minDate: e.target.value,
+      // maxDate: minDate.fp_incr(14), // 14 days from now
       disable: unavailableDates,
-      dateFormat: "Y-m-d"
+      enableTime: true,
+      // noCalendar: true,
+      dateFormat: "Y-m-d H:i",
+      // time_24hr: true
       });
     })
   };
