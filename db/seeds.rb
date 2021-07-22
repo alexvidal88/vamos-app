@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# Parameter.create(weather_parameter: "Temperature", weather_key: "tempC")
+# Parameter.create(weather_parameter: "Wind Direction", weather_key: "winddir16Point")
+Parameter.create(weather_parameter: "Humidity", weather_key: "humidity")

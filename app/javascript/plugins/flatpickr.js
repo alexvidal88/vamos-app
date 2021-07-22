@@ -14,7 +14,7 @@ const datePicker = () => {
   flatpickr(startDateInput, {
     minDate: "today",
     maxDate: new Date().fp_incr(14),
-    disable: unavailableDates,
+    // disable: unavailableDates,
     enableTime: true,
     // noCalendar: true,
     dateFormat: "Y-m-d H:i",
@@ -28,7 +28,7 @@ const datePicker = () => {
     flatpickr(endDateInput, {
       minDate: e.target.value,
       // maxDate: minDate.fp_incr(14), // 14 days from now
-      disable: unavailableDates,
+      // disable: unavailableDates,
       enableTime: true,
       // noCalendar: true,
       dateFormat: "Y-m-d H:i",

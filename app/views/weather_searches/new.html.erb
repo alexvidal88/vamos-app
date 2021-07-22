@@ -1,0 +1,23 @@
+
+<div class="card sign">
+<%= simple_form_for @search do |f| %>
+  <%= f.input :address, label: "Location" %>
+  <%= f.input :weather_type, :collection => %w[ski marine], label: "Pick weather type"  %>
+  <%= f.association :search_parameters, :collection => Parameter.all %>
+  <div class="form-actions text-center m-auto">
+    <%= f.submit "search", class: 'btn btn-primary' %>
+  </div>
+<% end %>
+</div>
+
+<div class= "sign" id='weather-search-times' data-unavailable="<%= @search.unavailable_times.to_json %>">
+  <%# if current_user.id != @search.user_id  %>
+    <%= simple_form_for @search do |f| %>
+       <%#= f.input :start_time, as: :string, type: :text %>
+       <%#= f.input :end_time, as: :string, type: :text %>
+        <div class="form-actions text-center m-auto">
+          <%#= f.submit "Book", class: "btn btn-primary" %>
+        </div>
+    <% end %>
+  <%# end %>
+</div>

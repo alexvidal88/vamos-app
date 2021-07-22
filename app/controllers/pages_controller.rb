@@ -3,6 +3,5 @@ class PagesController < ApplicationController
   # require "rest-client"
 
   def home
-
   end
 end

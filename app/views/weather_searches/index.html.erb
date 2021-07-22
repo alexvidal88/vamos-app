@@ -1,24 +1,3 @@
-<div class="card sign">
-<%= simple_form_for @search do |f| %>
-  <%= f.input :address, label: "address" %>
-  <div class="form-actions text-center m-auto">
-    <%= f.submit class: 'btn btn-primary' %>
-    <%= f.association :forecast_result %>
-  </div>
-<% end %>
-</div>
-
-<div class= "sign" id='weather-search-times' data-unavailable="<%= @search.unavailable_times.to_json %>">
-  <% if current_user.id != @search.user_id  %>
-    <%= simple_form_for @search do |f| %>
-       <%= f.input :start_time, as: :string, type: :text %>
-       <%= f.input :end_time, as: :string, type: :text %>
-        <div class="form-actions text-center m-auto">
-          <%= f.submit "Book", class: "btn btn-primary" %>
-        </div>
-    <% end %>
-  <% end %>
-</div>
 
 <div id="map"
      style="width: 100%; height: 600px;"
@@ -26,26 +5,16 @@
      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>
 
+<h1> World weather online API results :</h1>
 
-//World weather online API
+ <h1><%#= @output %></h1>
 
-<div>
-  <% @searches.each do |search| %>
-    <% @url = "https://api.worldweatheronline.com/premium/v1/ski.ashx?key=c554d8234d824db29ee34354211407&q=#{search.latitude},#{search.longitude}&format=json" %>
-    <% @uri = URI(@url) %>
-    <% @response = Net::HTTP.get(@uri) %>
-    <% @output = JSON.parse(@response) %>
-    <% @output["data"]["weather"].each do |out| %>
-     <% out["bottom"].each do |param| %>
-        <h3> <%= param["maxtempC"] %> </h3>
-     <% end %>
-    <h3> <%= link_to "delete" , search, method: :delete %> </h3>
-     <% end %>
-  <% end  %>
+
+<%  @output.each do |out|  %>
+<div class="card">
+  <% out[:keys].each do |key| %>
+    <h1> <%=  retriever(out[:api]["data"]["weather"], key, out[:weather_type]) %> </h1>
+  <% end %>
 </div>
-
-
-
-
-
+<% end %>
 
