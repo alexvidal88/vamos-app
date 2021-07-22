@@ -4,3 +4,17 @@
      data-markers="<%= @markers.to_json %>"
      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>
+
+<h1> World weather online API results :</h1>
+
+ <h1><%#= @output %></h1>
+
+
+<%  @output.each do |out|  %>
+<div class="card">
+  <% out[:keys].each do |key| %>
+    <h1> <%=  retriever(out[:api]["data"]["weather"], key, out[:weather_type]) %> </h1>
+  <% end %>
+</div>
+<% end %>
+

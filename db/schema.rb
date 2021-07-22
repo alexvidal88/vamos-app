@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_17_015939) do
+ActiveRecord::Schema.define(version: 2021_07_22_090149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,12 +40,15 @@ ActiveRecord::Schema.define(version: 2021_07_17_015939) do
     t.text "result"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "weather_search_id"
+    t.index ["weather_search_id"], name: "index_forecast_results_on_weather_search_id"
   end
 
   create_table "parameters", force: :cascade do |t|
     t.text "weather_parameter"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "weather_key"
   end
 
   create_table "search_parameters", force: :cascade do |t|
@@ -77,19 +80,18 @@ ActiveRecord::Schema.define(version: 2021_07_17_015939) do
     t.string "end_time"
     t.string "frecuency"
     t.bigint "user_id", null: false
-    t.bigint "forecast_result_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.float "latitude"
     t.float "longitude"
     t.string "address"
-    t.index ["forecast_result_id"], name: "index_weather_searches_on_forecast_result_id"
+    t.string "weather_type"
     t.index ["user_id"], name: "index_weather_searches_on_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "forecast_results", "weather_searches"
   add_foreign_key "search_parameters", "parameters"
   add_foreign_key "search_parameters", "weather_searches"
-  add_foreign_key "weather_searches", "forecast_results"
   add_foreign_key "weather_searches", "users"
 end
