@@ -9,6 +9,7 @@ require("@rails/activestorage").start()
 require("channels")
 
 import "bootstrap";
+
 // import flatpickr from "flatpickr";
 import { datePicker } from "../plugins/flatpickr";
 import { initMapbox } from '../plugins/init_mapbox';

@@ -49,6 +49,7 @@ class WeatherSearchesController < ApplicationController
     redirect_to weather_searches_path
   end
 
+
   private
 
   def search_params

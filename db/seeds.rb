@@ -6,6 +6,22 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
 # Parameter.create(weather_parameter: "Temperature", weather_key: "tempC")
 # Parameter.create(weather_parameter: "Wind Direction", weather_key: "winddir16Point")
 Parameter.create(weather_parameter: "Humidity", weather_key: "humidity")
+
+data = File.read('public/user_seeds.json')
+new_users = JSON.parse(data)
+new_users['users'].each do |new_user|
+  created_user = User.new(
+    first_name: new_user['first_name'],
+    last_name: new_user['last_name'],
+    username: new_user['username'],
+    email: new_user['email'],
+    password: '12345678'
+  )
+  created_user.save!
+end
+
+
