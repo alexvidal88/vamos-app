@@ -29,6 +29,7 @@ class WeatherSearchesController < ApplicationController
     @search = WeatherSearch.find(params[:id])
   end
 
+
   private
 
   def search_params
