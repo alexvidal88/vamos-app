@@ -28,8 +28,8 @@ gem 'devise'
 gem 'simple_form'
 gem "rest-client"
 gem 'turbolinks_render'
-
 gem 'geocoder'
+gem 'json', '~> 2.5', '>= 2.5.1'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 gem 'dotenv-rails', groups: [:development, :test]
