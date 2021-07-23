@@ -3,17 +3,14 @@
 <%= simple_form_for @search do |f| %>
   <%= f.input :address, label: "Location" %>
   <%= f.input :weather_type, :collection => %w[ski marine], label: "Pick type of activity"  %>
-  <% if f.weather_type == "ski" %>
-    <%= f.association :parameters, collection: Parameter.where(activity_type: "land").pluck(:weather_parameter) %>
-  <% else %>
-  <%= f.association :parameters, collection: Parameter.where(activity_type: "water").pluck(:weather_parameter) %>
-  <% end %>
+  <%= f.association :parameters, collection: Parameter.where(activity_type: "land").pluck(:weather_parameter), label: "Parameters for land activities" %>
+  <%= f.association :parameters, collection: Parameter.where(activity_type: "water").pluck(:weather_parameter), label: "Parameters for water activities" %>
+  <%= f.grouped_collection_select :parameters, Parameter.order(:activity_type), :weather_parameter %>
   <div class="form-actions text-center m-auto">
     <%= f.submit "search", class: 'btn btn-primary' %>
   </div>
 <% end %>
 </div>
-
 
 
 <div class= "sign" id='weather-search-times' data-unavailable="<%= @search.unavailable_times.to_json %>">
