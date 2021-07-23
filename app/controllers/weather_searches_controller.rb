@@ -19,7 +19,7 @@ class WeatherSearchesController < ApplicationController
       @response = Net::HTTP.get(@uri)
       @api = JSON.parse(@response)
       @keys = search.parameters.pluck(:weather_key)
-       {:api => @api, :keys => @keys, :weather_type => search.weather_type}
+      {:api => @api, :keys => @keys, :weather_type => search.weather_type}
     end
   end
 
@@ -33,12 +33,11 @@ class WeatherSearchesController < ApplicationController
     if @search.save
       params[:weather_search][:search_parameter_ids].reject(&:blank?).each do |id|
         SearchParameter.create(:weather_search => @search, :parameter_id => id)
-        end
+      end
       redirect_to weather_searches_path
     else
       render :new
     end
-
   end
 
   def show
@@ -53,7 +52,7 @@ class WeatherSearchesController < ApplicationController
   private
 
   def search_params
-    params.require(:weather_search).permit(:address, :weather_type, :start_time, :end_time, :frecuency, :address)
+    params.require(:weather_search).permit(:address, :weather_type, :start_time, :end_time, :frecuency)
   end
 
   def set_weather_search
