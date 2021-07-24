@@ -4,7 +4,7 @@ class WeatherSearch < ApplicationRecord
 
   belongs_to :user
   has_many :forecast_results
-  has_many :search_parameters
+  has_many :search_parameters, dependent: :destroy
   has_many :parameters, through: :search_parameters
 
   # validates :start_time, :end_time, :frecuency, :address, presence: true

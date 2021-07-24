@@ -2,8 +2,13 @@
 <div class="card sign">
 <%= simple_form_for @search do |f| %>
   <%= f.input :address, label: "Location" %>
-  <%= f.input :weather_type, :collection => %w[ski marine], label: "Pick weather type"  %>
-  <%= f.association :search_parameters, :collection => Parameter.all %>
+  <%= f.input :weather_type, :collection => %w[ski marine], label: "Pick type of activity"  %>
+  <%= f.association :parameters, collection: Parameter.where(activity_type: "land").pluck(:weather_parameter), label: "ski parameters" %>
+  <%#= f.association :parameters, collection: Parameter.where(activity_type: "water").pluck(:weather_parameter), label: "marine parameters" %>
+  <div class= "sign" id='weather-search-times' data-unavailable="<%= @search.unavailable_times.to_json %>">
+    <%= f.input :start_time, as: :string, type: :text %>
+    <%= f.input :end_time, as: :string, type: :text %>
+  </div>
   <div class="form-actions text-center m-auto">
     <%= f.submit "search", class: 'btn btn-primary' %>
   </div>

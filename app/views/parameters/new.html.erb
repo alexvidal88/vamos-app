@@ -1,0 +1,15 @@
+<div class="card sign">
+<%= simple_form_for @parameter do |f| %>
+  <%= f.input :weather_parameter, label: "Put the parameter name" %>
+  <%= f.input :activity_type, collection: %w[ski marine], label: "Pick the type of activity" %>
+  <%= f.input :weather_key, label: "Put the exact API key" %>
+  <div class="form-actions text-center m-auto">
+    <%= f.submit "create", class: 'btn btn-primary' %>
+  </div>
+<% end %>
+</div>
+
+
+<!-- # Parameter.create(weather_parameter: "Temperature", weather_key: "tempC")
+# Parameter.create(weather_parameter: "Wind Direction", weather_key: "winddir16Point")
+# Parameter.create(weather_parameter: "Humidity", weather_key: "humidity") -->
