@@ -31,8 +31,8 @@ class WeatherSearchesController < ApplicationController
     @search = WeatherSearch.new(search_params)
     @search.user = current_user
     if @search.save
-      params[:weather_search][:parameter_ids].reject(&:blank?).each do |id|
-        SearchParameter.create(:weather_search_id => @search, :parameter_id => id)
+      params[:weather_search][:parameter_ids].reject(&:blank?).each do |param_name|
+        SearchParameter.create(:weather_search => @search, :parameter => Parameter.find_by(weather_parameter: param_name))
       end
       redirect_to weather_searches_path
     else
