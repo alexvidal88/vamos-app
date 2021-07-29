@@ -1,3 +1,23 @@
+<div>
+<h3> Weather Parameters</h3>
 <% @parameters.each do |parameter| %>
- <h1> <%= parameter.weather_parameter %></h1>
+  <% if parameter.activity_type == "weather" %>
+    <ul>
+        <li><small> <%= parameter.weather_parameter %> </small> <small> <%= link_to "delete", parameters_path(parameter), method: :delete %></small></li>
+    </ul>
+  <%end %>
 <% end %>
+</div>
+
+<div>
+<h3>Marine Params</h3>
+<% @parameters.each do |parameter|%>
+  <% if parameter.activity_type == "marine" %>
+    <ul>
+        <li><small> <%= parameter.weather_parameter %> </small> <small> <%= link_to "delete", parameters_path(parameter), method: :delete %></small></li>
+    </ul>
+  <%end %>
+<% end %>
+</div>
+
+

@@ -1,11 +1,14 @@
 class ParametersController < ApplicationController
-  before_action :set_parameter, only: :destroy
+  before_action :set_parameter, only: [:show, :destroy]
   def index
     @parameters = Parameter.all
   end
 
   def new
     @parameter = Parameter.new
+  end
+
+  def show
   end
 
   def create
@@ -16,7 +19,7 @@ class ParametersController < ApplicationController
 
   def destroy
     @parameter.destroy
-    redirect_to weather_searches_path
+    redirect_to parameters_path
   end
 
   private
@@ -28,6 +31,4 @@ class ParametersController < ApplicationController
   def set_parameter
     @parameter = Parameter.find(params[:id])
   end
-
-
 end
