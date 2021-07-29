@@ -1,14 +1,22 @@
 // Specific CSS for your home-page
 
 .container {
-  background-image: url('https://miro.medium.com/max/4800/1*H2aH5K9ZbZAV8s_-wEWRdA.jpeg');
+  background-image: url('https://images.unsplash.com/photo-1586022045497-31fcf76fa6cc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8aGlraW5nfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80');
   background-size: cover;
-  height: 900px;
+  background-position: center;
   width: 100%;
-  // color: #eee;
+  height: 100vh;
+  // max-device-height : 1024px;
+  // max-device-width : 1024px;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
   text-align: center;
-  // padding-top: 40vh;
 }
+
+// .container{
+//   background-image: url('https://miro.medium.com/max/4800/1*H2aH5K9ZbZAV8s_-wEWRdA.jpeg')center center no-repeat fixed;
+//   background-size: 100% auto;
+// }
 .h1 {
   padding: 30px;
 }
