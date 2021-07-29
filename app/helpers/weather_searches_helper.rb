@@ -1,34 +1,70 @@
 module WeatherSearchesHelper
   def retriever(api, key, weather_type, time)
     if weather_type == "weather"
-      if key == "uvIndex" && ("#{time}00").to_i.to_s == api[0]["hourly"][0]["time"]
-        "#{api[0]["hourly"][0][key]} UV Index"
-        # "#{api[0][key]}" #(@api["data"]["weather"][0]["avgtempC"])
+      if key == "uvIndex" && ("#{time}00").to_i.to_s == api[0]["hourly"][time.to_i]["time"]
 
-      elsif key == "chanceofrain" && ("#{time}00").to_i.to_s == api[0]["hourly"][0]["time"]
-        # "#{api[0][key]} Hours of sun"
-        "#{api[0]["hourly"][0][key]} % Chance of rain"
-      # elsif key == "winddir16Point"
-      #    "#{api[0]["hourly"][0]["bottom"][0][key]} #{api[0]["hourly"][0]["bottom"][0]["windspeedKmph"]}"
+        "UV Index: #{api[0]["hourly"][time.to_i][key]} "
+
+      elsif key == "chanceofrain" && ("#{time}00").to_i.to_s == api[0]["hourly"][time.to_i]["time"]
+
+        "Chance of rain: #{api[0]["hourly"][time.to_i][key]}%"
+
+      elsif key == "windspeedKmph" && ("#{time}00").to_i.to_s == api[0]["hourly"][time.to_i]["time"]
+
+        "Wind Speed: #{api[0]["hourly"][time.to_i][key]} Kmph"
+
+      elsif key == "winddir16Point" && ("#{time}00").to_i.to_s == api[0]["hourly"][time.to_i]["time"]
+
+        "Wind Direction: #{api[0]["hourly"][time.to_i][key]}"
+
+      elsif key == "precipMM" && ("#{time}00").to_i.to_s == api[0]["hourly"][time.to_i]["time"]
+
+        "Precipitation: #{api[0]["hourly"][time.to_i][key]} mm"
+
+      elsif key == "humidity" && ("#{time}00").to_i.to_s == api[0]["hourly"][time.to_i]["time"]
+
+        "Humidity: #{api[0]["hourly"][time.to_i][key]} %"
+
+      elsif key == "visibility" && ("#{time}00").to_i.to_s == api[0]["hourly"][time.to_i]["time"]
+
+        "Visibility: #{api[0]["hourly"][time.to_i][key]} Km"
       end
+
     elsif weather_type == "marine"
-    #   if key == "uvIndex"
-    #     api[0]["hourly"][0][key]
-    #   elsif key == "swellHeight_m"
-    #     api[0]["hourly"][0][key]
-    #   elsif key == "waterTemp_C"
-    #      api[0]["hourly"][0][key]
-    #   end
-    # end
+      if key == "tempC" && ("#{time}00").to_i.to_s == api[0]["hourly"][time.to_i]["time"]
+
+        "Temperature: #{api[0]["hourly"][time.to_i][key]} C"
+
+      elsif key == "windspeedKmph" && ("#{time}00").to_i.to_s == api[0]["hourly"][time.to_i]["time"]
+
+        "Wind Speed: #{api[0]["hourly"][time.to_i][key]} Kmph"
+
+      elsif key == "winddir16Point" && ("#{time}00").to_i.to_s == api[0]["hourly"][time.to_i]["time"]
+
+        "Wind Direction: #{api[0]["hourly"][time.to_i][key]}"
+
+      elsif key == "swellHeight_m" && ("#{time}00").to_i.to_s == api[0]["hourly"][time.to_i]["time"]
+
+        "Wave Height: #{api[0]["hourly"][time.to_i][key]} meters"
+
+      elsif key == "swellDir16Point" && ("#{time}00").to_i.to_s == api[0]["hourly"][time.to_i]["time"]
+
+        "Wave Direction: #{api[0]["hourly"][time.to_i][key]}"
+
+      elsif key == "swellPeriod_secs" && ("#{time}00").to_i.to_s == api[0]["hourly"][time.to_i]["time"]
+
+        "Wave Duration: #{api[0]["hourly"][time.to_i][key]} secs"
+
+      elsif key == "waterTemp_C" && ("#{time}00").to_i.to_s == api[0]["hourly"][time.to_i]["time"]
+
+        "Water Temperature: #{api[0]["hourly"][time.to_i][key]} C"
+
+      elsif key == "uvIndex" && ("#{time}00").to_i.to_s == api[0]["hourly"][time.to_i]["time"]
+
+        "UV Index: #{api[0]["hourly"][time.to_i][key]}"
+
+      end
     end
   end
 end
 
-
-# <%  @output.each do |out|  %>
-#   <div class="card">
-#     <% out[:keys].each do |key| %>
-#       <h1> <%=  retriever(out[:api]["data"]["weather"], key, out[:weather_type]), out[:time] %> </h1>
-#     <% end %>
-#   </div>
-# <% end %>
