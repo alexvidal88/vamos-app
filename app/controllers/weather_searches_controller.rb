@@ -2,6 +2,7 @@
   require 'json'
 
 class WeatherSearchesController < ApplicationController
+  skip_before_action :authenticate_user!, only: :new
   before_action :set_weather_search, only: [:show, :destroy]
   def index
     # @search = WeatherSearch.new
@@ -12,7 +13,7 @@ class WeatherSearchesController < ApplicationController
         lng: search.longitude
       }
     end
-
+      # spare key = 0e0a60ab61054e5a8df85413212907
     @output = @searches.map do |search|
 
       @date = search.start_time.split(" ")[0]
@@ -21,7 +22,7 @@ class WeatherSearchesController < ApplicationController
       @response = Net::HTTP.get(@uri)
       @api = JSON.parse(@response)
       @keys = search.parameters.pluck(:weather_key)
-      {:api => @api, :keys => @keys, :weather_type => search.weather_type, :time => search.start_time.split(" ")[1]}
+      {:api => @api, :keys => @keys, :weather_type => search.weather_type, :time => search.start_time.split(" ")[1], id: search.id}
     end
   end
 

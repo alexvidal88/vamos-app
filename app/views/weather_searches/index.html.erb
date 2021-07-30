@@ -1,20 +1,22 @@
 
-<div id="map"
-     style="width: 100%; height: 300px;"
+<div class="weather-search">
+  <div class="search-item" id="map"
+     style="width: 100%; height: 250px;"
      data-markers="<%= @markers.to_json %>"
      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
-</div>
-
-<h5> World weather online API results :</h5>
+  </div>
 
 <%  @output.each do |out|  %>
-  <div class="card">
+  <div class="search-card search-item">
     <% out[:keys].each do |key| %>
       <small> <%=  retriever(out[:api]["data"]["weather"], key, out[:weather_type], out[:time]) %></small>
     <% end %>
+    <small> <%= link_to "delete search", weather_search_path(out[:id]), method: :delete  %></small>
   </div>
-<small> <%#= link_to "delete", weather_searches_path(out), method: :delete  %></small>
 <% end %>
+</div>
+
+
 
 
 

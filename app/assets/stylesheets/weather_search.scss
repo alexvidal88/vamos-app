@@ -1,3 +1,79 @@
 .hidden {
  display:  none;
 }
+
+.search-card {
+  color:  white;
+  /*background-color: #0074D9;*/
+  margin: 10px;
+  border-radius: 10px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255, 255, 240, 0.2);
+  box-shadow: 0px 0px 2px 1px;
+}
+
+.search-form {
+  background-color: rgba(255, 255, 240, 0.2);
+  box-shadow: 0px 0px 2px 1px;
+  margin-bottom: 100px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.search-page {
+  background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url('https://miro.medium.com/max/4800/1*H2aH5K9ZbZAV8s_-wEWRdA.jpeg');
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  h1 {
+    color: white;
+    font-weight: bold;
+    font-size: 45px;
+    /*padding: 30px;*/
+  }
+
+  .form-inputs {
+    color: black;
+    /*opacity: 0.8;*/
+    font-size: 15px;
+    /*font-weight: lighter;*/
+  }
+
+  .btn {
+    /*background-color: ;*/
+    width: 50%;
+    margin: 5px;
+    border-radius: 10px;
+  }
+
+  .btn:hover {
+    background-color: #383;
+  }
+
+}
+
+/*#weather-search-times {
+  color: white;
+  opacity: 0.8;
+  font-size: 15px;
+  font-weight: lighter;
+}*/
+
+.weather-search {
+  background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url('https://miro.medium.com/max/4800/1*H2aH5K9ZbZAV8s_-wEWRdA.jpeg');
+  background-size: cover;
+  height: 100vh;
+  /*display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;*/
+}
+
+

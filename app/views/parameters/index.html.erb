@@ -3,7 +3,7 @@
 <% @parameters.each do |parameter| %>
   <% if parameter.activity_type == "weather" %>
     <ul>
-        <li><small> <%= parameter.weather_parameter %> </small> <small> <%= link_to "delete", parameters_path(parameter), method: :delete %></small></li>
+        <li><small> <%= parameter.weather_parameter %> </small> <small> <%= link_to "delete", parameter_path(parameter), method: :delete %></small></li>
     </ul>
   <%end %>
 <% end %>
@@ -14,7 +14,7 @@
 <% @parameters.each do |parameter|%>
   <% if parameter.activity_type == "marine" %>
     <ul>
-        <li><small> <%= parameter.weather_parameter %> </small> <small> <%= link_to "delete", parameters_path(parameter), method: :delete %></small></li>
+        <li><small> <%= parameter.weather_parameter %> </small> <small> <%= link_to "delete", parameter_path(parameter), method: :delete %></small></li>
     </ul>
   <%end %>
 <% end %>
