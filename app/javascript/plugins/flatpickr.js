@@ -18,7 +18,8 @@ const datePicker = () => {
       enableTime: true,
       // noCalendar: true,
       dateFormat: "Y-m-d H",
-      time_24hr: true
+      time_24hr: true,
+      disableMobile: "true"
     });
 
   // startDateInput.addEventListener("change", (e) => {
