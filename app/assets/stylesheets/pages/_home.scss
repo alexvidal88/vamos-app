@@ -1,15 +1,36 @@
 // Specific CSS for your home-page
 
-.container {
-  background-image: url('https://miro.medium.com/max/4800/1*H2aH5K9ZbZAV8s_-wEWRdA.jpeg');
+.banner {
+  background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url('https://miro.medium.com/max/4800/1*H2aH5K9ZbZAV8s_-wEWRdA.jpeg');
   background-size: cover;
-  height: 900px;
-  width: 100%;
-  // color: #eee;
-  text-align: center;
-  // padding-top: 40vh;
-}
-.h1 {
-  padding: 30px;
-}
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 
+  h1 {
+    color: white;
+    font-weight: bold;
+    font-size: 45px;
+    /*padding: 30px;*/
+  }
+
+  p {
+    color: white;
+    opacity: 0.8;
+    font-size: 15px;
+    font-weight: lighter;
+  }
+
+  .btn {
+    /*background-color: ;*/
+    width: 50%;
+    margin: 5px;
+    border-radius: 10px;
+  }
+
+  .btn:hover {
+    background-color: #383;
+
+  }
+}
