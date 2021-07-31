@@ -1,9 +1,13 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background-color: transparent;
+  background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url(vamos.png);
   box-shadow: none;
   /*position: absolute;*/
   width: 100%;
+  padding: 8px;
+  align-items: center;
+  display: flex;
+
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -17,6 +21,22 @@
 
 .dropdown-menu {
   left:  auto;
+  position: relative;
+  // margin-top: 50px;
+  transform: translate3d(-120px, 60px, 0px);
+
 }
 
+// .navbar-lewagon {
+//   justify-content: space-between;
+//   background: white;
+// }
+
+// .navbar-lewagon .navbar-collapse {
+//   flex-grow: 0;
+// }
+
+// .navbar-lewagon .navbar-brand img {
+//   width: 40px;
+// }
 
