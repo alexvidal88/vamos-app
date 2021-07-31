@@ -8,8 +8,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   private
 
-  def send_welcome_email
-    UserMailer.with(user: self).welcome.deliver_now
-  end
+  # def send_welcome_email
+  #   UserMailer.with(user: self).welcome.deliver_now
+  # end
 
 end
