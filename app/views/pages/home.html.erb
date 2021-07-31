@@ -2,6 +2,7 @@
   <div class="banner">
     <div class="banner-content text-center">
       <h1> <strong> Welcome <%= current_user.first_name %> </strong> </h1>
+       <p> <span id="banner-typed-text"></span></p>
        <%= link_to 'Keep exploring', '/weather_searches/new',:class => "btn btn-primary btn-lg" %>
     </div>
   </div>
@@ -9,8 +10,9 @@
   <div class="banner">
     <div class="banner-content text-center">
       <h1>VAMOS!</h1>
-      <p> <span id="banner-typed-text"></span></p>
-      <%= link_to 'log-in/sign-up', '/users/sign_in' , :class => "btn btn-primary btn-lg" %>
+        <p> <span id="banner-typed-text"></span></p>
+      <%= link_to 'login', '/users/sign_in' , :class => "btn btn-primary btn-lg" %>
+      <%= link_to 'sign-up', '/users/sign_up' , :class => "btn btn-primary btn-lg" %>
       <%= link_to 'Continue as a Guest', new_weather_search_path , :class => "btn btn-primary btn-lg" %>
     </div>
   </div>

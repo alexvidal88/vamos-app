@@ -1,6 +1,20 @@
+<div class="search-page">
+  <div class="weather-search">
+    <div class="search-card search-item">
+        <h3> <%= @search.address %></h3>
+        <small> <%= @search.start_time %></small>
+        <small> <%= link_to "make a new search", new_weather_search_path %></small>
+    </div>
+  </div>
+</div>
 
-<h3> <%= @search.address %></h3>
+
+  <!-- <div class="search-card search-item">
+    <#% @result[:keys].each do |key| %>
+      <small> <%#=  retriever(@result[:api]["data"]["weather"], key, @result[:weather_type], @result[:time]) %></small>
+    <#% end %>
+  </div> -->
 
 
 
-<%= @output %>
+

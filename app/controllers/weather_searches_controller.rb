@@ -2,10 +2,10 @@
   require 'json'
 
 class WeatherSearchesController < ApplicationController
-  skip_before_action :authenticate_user!, only: :new
+  skip_before_action :authenticate_user!, only: [:new, :create, :destroy, :show]
   before_action :set_weather_search, only: [:show, :destroy]
+
   def index
-    # @search = WeatherSearch.new
     @searches = current_user.weather_searches
     @markers = @searches.geocoded.map do |search|
       {
@@ -15,7 +15,6 @@ class WeatherSearchesController < ApplicationController
     end
       # spare key = 0e0a60ab61054e5a8df85413212907
     @output = @searches.map do |search|
-
       @date = search.start_time.split(" ")[0]
       @url = "https://api.worldweatheronline.com/premium/v1/#{search.weather_type}.ashx?key=bd3331a32f9e48a9bd834355212707&q=#{search.latitude},#{search.longitude}&format=json&tp=1&date=#{@date}"
       @uri = URI(@url)
@@ -32,12 +31,18 @@ class WeatherSearchesController < ApplicationController
 
   def create
     @search = WeatherSearch.new(search_params)
-    @search.user = current_user
+    if current_user
+      @search.user = current_user
+    end
     if @search.save
       params[:weather_search][:parameter_ids].reject(&:blank?).each do |param_name|
         SearchParameter.create(:weather_search => @search, :parameter => Parameter.find_by(weather_parameter: param_name))
       end
-      redirect_to weather_searches_path
+      if current_user
+        redirect_to weather_searches_path
+      else
+        redirect_to weather_search_path(@search)
+      end
     else
       render :new
     end
@@ -45,6 +50,16 @@ class WeatherSearchesController < ApplicationController
   end
 
   def show
+    # @search = WeatherSearch.new
+    #   # spare key = 0e0a60ab61054e5a8df85413212907
+    # # @output = @search.map do |sear|
+    # @date = @search.start_time.split(" ")[0]
+    # @url = "https://api.worldweatheronline.com/premium/v1/#{@search.weather_type}.ashx?key=bd3331a32f9e48a9bd834355212707&q=#{@search.latitude},#{@search.longitude}&format=json&tp=1&date=#{@date}"
+    # @uri = URI(@url)
+    # @response = Net::HTTP.get(@uri)
+    # @api = JSON.parse(@response)
+    # @keys = @search.parameters.pluck(:weather_key)
+    # @result = {:api => @api, :keys => @keys, :weather_type => @search.weather_type, :time => @search.start_time.split(" ")[1], id: @search.id}
   end
 
   def destroy
