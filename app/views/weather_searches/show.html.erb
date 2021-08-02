@@ -1,32 +1,20 @@
 
-
-
-  <!-- <div class="search-card search-item">
-    <#% @result[:keys].each do |key| %>
-      <small> <%#=  retriever(@result[:api]["data"]["weather"], key, @result[:weather_type], @result[:time]) %></small>
-    <#% end %>
-  </div> -->
-
-
-
-<!-- <div class="search-card search-item"> -->
-  <% @searches.each do |search|%>
-    <small> <%= search.address %> </small>
-  <% end %>
-<%  @output.each do |out|  %>
-    <small> Searched: <%= out[:date] %> at <%= out[:exact_time] %> hrs</small>
-    <div>
-      <!-- <div class="search-card "> -->
-        <small> <%= image_tag "#{ url_retriever(out[:api]["data"]["weather"], out[:weather_type], out[:time])}" %></small>
-        <small> <%= weather_comment(out[:api]["data"]["weather"], out[:weather_type], out[:time]) %></small>
-      <!-- </div> -->
-      <!-- <div class="search-card"> -->
-        <% out[:keys].each do |key| %>
-          <small> <%=  retriever(out[:api]["data"]["weather"], key, out[:weather_type], out[:time]) %></small>
-        <% end %>
-        <small> <%= link_to "delete search", weather_search_path(out[:id]), method: :delete  %></small>
-      <!-- </div> -->
+<div class="weather-search">
+  <div class="search-card search-item">
+      <small> <%= @search.address %> </small>
+      <small> Searched: <%= @output[:date] %> at <%= @output[:exact_time] %> hrs</small>
+      <div>
+        <div class="search-card ">
+          <small> <%= image_tag "#{ url_retriever(@output[:api]["data"]["weather"], @output[:weather_type], @output[:time])}" %></small>
+          <small> <%= weather_comment(@output[:api]["data"]["weather"], @output[:weather_type], @output[:time]) %></small>
+        </div>
+        <div class="search-card">
+          <% @output[:keys].each do |key| %>
+            <small> <%=  retriever(@output[:api]["data"]["weather"], key, @output[:weather_type], @output[:time]) %></small>
+          <% end %>
+        </div>
+      </div>
+      <%= link_to "make new search", new_weather_search_path  %>
     </div>
   </div>
-<% end %>
 </div>
