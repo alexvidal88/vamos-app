@@ -6,12 +6,24 @@
      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
 
+<div class="search-card search-item">
+  <% @searches.each do |search|%>
+    <small> <%= search.address %> </small>
+  <% end %>
 <%  @output.each do |out|  %>
-  <div class="search-card search-item">
-    <% out[:keys].each do |key| %>
-      <small> <%=  retriever(out[:api]["data"]["weather"], key, out[:weather_type], out[:time]) %></small>
-    <% end %>
-    <small> <%= link_to "delete search", weather_search_path(out[:id]), method: :delete  %></small>
+    <small> Searched: <%= out[:date] %> at <%= out[:exact_time] %> hrs</small>
+    <div>
+      <div class="search-card ">
+        <small> <%= image_tag "#{ url_retriever(out[:api]["data"]["weather"], out[:weather_type], out[:time])}" %></small>
+        <small> <%= weather_comment(out[:api]["data"]["weather"], out[:weather_type], out[:time]) %></small>
+      </div>
+      <div class="search-card">
+        <% out[:keys].each do |key| %>
+          <small> <%=  retriever(out[:api]["data"]["weather"], key, out[:weather_type], out[:time]) %></small>
+        <% end %>
+        <small> <%= link_to "delete search", weather_search_path(out[:id]), method: :delete  %></small>
+      </div>
+    </div>
   </div>
 <% end %>
 </div>

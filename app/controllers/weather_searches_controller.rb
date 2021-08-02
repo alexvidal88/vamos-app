@@ -21,7 +21,7 @@ class WeatherSearchesController < ApplicationController
       @response = Net::HTTP.get(@uri)
       @api = JSON.parse(@response)
       @keys = search.parameters.pluck(:weather_key)
-      {:api => @api, :keys => @keys, :weather_type => search.weather_type, :time => search.start_time.split(" ")[1], id: search.id}
+      {:api => @api, :keys => @keys, :weather_type => search.weather_type, :time => search.start_time.split(" ")[1].split(":")[0], id: search.id, :date => search.start_time.split(" ")[0], :exact_time => search.start_time.split(" ")[1]}
     end
   end
 
@@ -46,27 +46,24 @@ class WeatherSearchesController < ApplicationController
     else
       render :new
     end
-
   end
 
   def show
-    # @search = WeatherSearch.new
-    #   # spare key = 0e0a60ab61054e5a8df85413212907
-    # # @output = @search.map do |sear|
-    # @date = @search.start_time.split(" ")[0]
-    # @url = "https://api.worldweatheronline.com/premium/v1/#{@search.weather_type}.ashx?key=bd3331a32f9e48a9bd834355212707&q=#{@search.latitude},#{@search.longitude}&format=json&tp=1&date=#{@date}"
-    # @uri = URI(@url)
-    # @response = Net::HTTP.get(@uri)
-    # @api = JSON.parse(@response)
-    # @keys = @search.parameters.pluck(:weather_key)
-    # @result = {:api => @api, :keys => @keys, :weather_type => @search.weather_type, :time => @search.start_time.split(" ")[1], id: @search.id}
+    @search = WeatherSearch.last
+      # spare key = 0e0a60ab61054e5a8df85413212907
+    @date = @search.start_time.split(" ")[0]
+    @url = "https://api.worldweatheronline.com/premium/v1/#{@search.weather_type}.ashx?key=bd3331a32f9e48a9bd834355212707&q=#{@search.latitude},#{@search.longitude}&format=json&tp=1&date=#{@date}"
+    @uri = URI(@url)
+    @response = Net::HTTP.get(@uri)
+    @api = JSON.parse(@response)
+    @keys = @search.parameters.pluck(:weather_key)
+    @output = {:api => @api, :keys => @keys, :weather_type => @search.weather_type, :time => @search.start_time.split(" ")[1].split(":")[0], id: @search.id, :date => @search.start_time.split(" ")[0], :exact_time => @search.start_time.split(" ")[1]}
   end
 
   def destroy
     @search.destroy
     redirect_to weather_searches_path
   end
-
 
   private
 

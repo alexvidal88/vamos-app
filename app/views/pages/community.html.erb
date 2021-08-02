@@ -1,0 +1,12 @@
+<div class="container py-5">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h3 class="mb-0">Community</h3>
+  </div>
+  <div class="row">
+    <% if @searches.count != 0 %>
+      <% @searches.each do |search| %>
+        <small> <%= search.address %> </small>
+      <% end %>
+    <% end %>
+  </div>
+</div>

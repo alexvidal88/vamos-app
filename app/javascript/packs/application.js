@@ -21,5 +21,5 @@ document.addEventListener('turbolinks:load', () => {
   initMapbox();
   initAutocomplete();
   weatherForm();
-  // loadDynamicBannerText();
+  loadDynamicBannerText();
 });

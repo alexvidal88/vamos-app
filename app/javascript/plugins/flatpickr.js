@@ -17,7 +17,7 @@ const datePicker = () => {
       // disable: unavailableDates,
       enableTime: true,
       // noCalendar: true,
-      dateFormat: "Y-m-d H",
+      dateFormat: "Y-m-d H:i",
       time_24hr: true,
       disableMobile: "true"
     });
