@@ -26,7 +26,8 @@
           <% end %>
           <div class="dropdown-menu">
             <%= link_to "My Dashboard", weather_searches_path, class: "dropdown-item" %>
-            <%= link_to "Make a search", new_weather_search_path, class: "dropdown-item" %>
+            <%= link_to "Make new search", new_weather_search_path, class: "dropdown-item" %>
+            <%= link_to "Community", community_path, class: "dropdown-item" %>
             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           </div>
         </div>
