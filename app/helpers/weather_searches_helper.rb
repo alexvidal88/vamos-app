@@ -1,6 +1,7 @@
 module WeatherSearchesHelper
   def retriever(api, key, weather_type, time)
     if weather_type == "weather"
+
       if key == "uvIndex" && ("#{time}00").to_i.to_s == api[0]["hourly"][time.to_i]["time"]
 
         "UV Index: #{api[0]["hourly"][time.to_i][key]} "
@@ -31,6 +32,7 @@ module WeatherSearchesHelper
       end
 
     elsif weather_type == "marine"
+
       if key == "tempC" && ("#{time}00").to_i.to_s == api[0]["hourly"][time.to_i]["time"]
 
         "Temperature: #{api[0]["hourly"][time.to_i][key]} C"
@@ -66,5 +68,33 @@ module WeatherSearchesHelper
       end
     end
   end
+
+  def url_retriever(api, weather_type, time)
+    if weather_type == "weather"
+      api[0]["hourly"][time.to_i]["weatherIconUrl"][0]["value"]
+    else
+      api[0]["hourly"][time.to_i]["weatherIconUrl"][0]["value"]
+    end
+  end
+
+  def weather_comment(api, weather_type, time)
+    if weather_type == "weather"
+      api[0]["hourly"][time.to_i]["weatherDesc"][0]["value"]
+    else
+      api[0]["hourly"][time.to_i]["weatherDesc"][0]["value"]
+    end
+  end
+
 end
+
+
+
+
+
+
+
+
+
+
+
 
