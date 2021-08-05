@@ -1,4 +1,4 @@
-
+<!--
 <div class="weather-search">
   <div class="search-card search-item">
       <small> <%= @search.address %> </small>
@@ -17,4 +17,27 @@
       <%= link_to "make new search", new_weather_search_path  %>
     </div>
   </div>
+</div> -->
+<div class="weather-search">
+  <small> Searched: <%= @output[:date] %> at <%= @output[:exact_time] %> hrs</small>
+  <div class="search-card search-item">
+    <h5>In <%= @search.address %></h5>
+<!--  <div class="search-card "> -->
+          <div class="image-card"> <%= image_tag "#{ url_retriever(@output[:api]["data"]["weather"], @output[:weather_type], @output[:time])}", class:"image" %> <h5> <%= weather_comment(@output[:api]["data"]["weather"], @output[:weather_type], @output[:time]) %></h5></div>
+        </div>
+  <!-- </div> -->
+
+<small> <%= @search.address %> </small>
+    <div>
+      <small> Searched: <%= @output[:date] %> at <%= @output[:exact_time] %> hrs</small>
+      <div>
+
+        <div class="search-card">
+          <% @output[:keys].each do |key| %>
+            <small> <%=  retriever(@output[:api]["data"]["weather"], key, @output[:weather_type], @output[:time]) %></small>
+          <% end %>
+        </div>
+      </div>
+      <%= link_to "make new search", new_weather_search_path  %>
+    </div>
 </div>
