@@ -5,7 +5,7 @@ class ReviewsController < ApplicationController
     @review.user = current_user
     @review.weather_search = @search
     if @review.save
-      redirect_to weather_searches_path
+      redirect_to "#{request.referrer}##{@review.id}"
     else
       render request.referrer
     end

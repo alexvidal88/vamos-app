@@ -11,18 +11,30 @@
         <% @output.each do |out|  %>
         <div class="search-card search-item">
           <div>
-            <small><%= out[:address] %> </small>
-            <small> Searched: <%= out[:date] %> at <%= out[:exact_time] %> hrs</small>
+            <div>
+              <small><%= out[:address] %> </small>
+            </div>
+            <div>
+              <small> Searched: <%= out[:date] %> at <%= out[:exact_time] %> hrs</small>
+            </div>
           </div>
-          <div>
-            <small> <%= image_tag "#{ url_retriever(out[:api]["data"]["weather"], out[:weather_type], out[:time])}", class: "avatar" %></small>
-            <small> <%= weather_comment(out[:api]["data"]["weather"], out[:weather_type], out[:time]) %></small>
+
+          <div class="d-flex justify-content-around">
+            <div>
+              <% out[:keys].each do |key| %>
+                <li> <%=  retriever(out[:api]["data"]["weather"], key, out[:weather_type], out[:time]) %></li>
+              <% end %>
+            </div>
+            <div>
+              <div class="d-flex justify-content-center">
+                <small> <%= image_tag "#{ url_retriever(out[:api]["data"]["weather"], out[:weather_type], out[:time])}", class: "avatar" %></small>
+              </div>
+              <div>
+                <small> <%= weather_comment(out[:api]["data"]["weather"], out[:weather_type], out[:time]) %></small>
+              </div>
+            </div>
           </div>
-          <div>
-            <% out[:keys].each do |key| %>
-              <small> <%=  retriever(out[:api]["data"]["weather"], key, out[:weather_type], out[:time]) %></small>
-            <% end %>
-          </div>
+
           <div >
             <a class="toggle">See comments</a>
             <% out[:search].reviews do |review| %>
