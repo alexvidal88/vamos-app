@@ -6,31 +6,40 @@
      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
 
-  <div class="search-card search-item">
+
     <% if @searches.count != 0 %>
-      <% @searches.each do |search|%>
-        <small> <%= search.address %> </small>
         <% @output.each do |out|  %>
-          <small> Searched: <%= out[:date] %> at <%= out[:exact_time] %> hrs</small>
+        <div class="search-card search-item">
           <div>
-            <div class="search-card ">
-              <small> <%= image_tag "#{ url_retriever(out[:api]["data"]["weather"], out[:weather_type], out[:time])}" %></small>
-              <small> <%= weather_comment(out[:api]["data"]["weather"], out[:weather_type], out[:time]) %></small>
-            </div>
-            <div class="search-card">
-              <% out[:keys].each do |key| %>
-                <small> <%=  retriever(out[:api]["data"]["weather"], key, out[:weather_type], out[:time]) %></small>
-              <% end %>
-              <small> <%= link_to "delete search", weather_search_path(out[:id]), method: :delete  %></small>
-            </div>
+            <small><%= out[:address] %> </small>
+            <small> Searched: <%= out[:date] %> at <%= out[:exact_time] %> hrs</small>
           </div>
+          <div>
+            <small> <%= image_tag "#{ url_retriever(out[:api]["data"]["weather"], out[:weather_type], out[:time])}" %></small>
+            <small> <%= weather_comment(out[:api]["data"]["weather"], out[:weather_type], out[:time]) %></small>
+          </div>
+          <div>
+            <% out[:keys].each do |key| %>
+              <small> <%=  retriever(out[:api]["data"]["weather"], key, out[:weather_type], out[:time]) %></small>
+            <% end %>
+          </div>
+          <div >
+            <button class="toggle">Reviews</button>
+            <% out[:search].reviews do |review| %>
+              <small><%= review.content %> </small>
+              <small><%= review.user.first_name.capitalize %> </small>
+            <% end %>
+            <%= simple_form_for([out[:search], @review ], remote: true) do |f| %>
+              <%= f.input :content, as: :text %>
+              <%= f.button :submit %>
+            <% end %>
+          </div>
+          <small> <%= link_to "delete search", weather_search_path(out[:id]), method: :delete  %></small>
         </div>
         <% end %>
-      <% end %>
     <% else %>
         <small> There is no searches listed yet</small>
     <% end %>
-  </div>
 </div>
 
 

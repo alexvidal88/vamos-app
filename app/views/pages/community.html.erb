@@ -2,22 +2,32 @@
     <% if @searches.count != 0  %>
         <% @output.each do |out|  %>
           <div class="search-card search-item">
-          <% if out[:search].user.photo.attached?%>
-          <%= cl_image_tag(out[:search].user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false)%>
-          <% else %>
-          <%= image_tag "https://res.cloudinary.com/batch-588/image/upload/v1627822930/squartl_avatar_t1rfxo.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-          <% end %>
-            <small><%= out[:search].user.first_name.capitalize %> </small>
-            <small><%= out[:address] %> </small>
-            <small> Searched: <%= out[:date] %> at <%= out[:exact_time] %> hrs</small>
-            <small> <%= image_tag "#{ url_retriever(out[:api]["data"]["weather"], out[:weather_type], out[:time])}" %></small>
-            <small> <%= weather_comment(out[:api]["data"]["weather"], out[:weather_type], out[:time]) %></small>
-
-            <% out[:keys].each do |key| %>
-              <small> <%=  retriever(out[:api]["data"]["weather"], key, out[:weather_type], out[:time]) %></small>
+            <% if out[:search].user.photo.attached?%>
+            <%= cl_image_tag(out[:search].user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false)%>
+            <% else %>
+            <%= image_tag "https://res.cloudinary.com/batch-588/image/upload/v1627822930/squartl_avatar_t1rfxo.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <% end %>
-            <button class="toggle">Reviews</button>
+            <div>
+              <% if out[:search].user == current_user %>
+              <small><%= out[:search].user.first_name.capitalize %> </small>
+              <% else %>
+              <small>You</small>
+              <% end %>
+
+              <small><%= out[:address] %> </small>
+              <small> Searched: <%= out[:date] %> at <%= out[:exact_time] %> hrs</small>
+            </div>
+            <div>
+              <small> <%= image_tag "#{ url_retriever(out[:api]["data"]["weather"], out[:weather_type], out[:time])}" %></small>
+              <small> <%= weather_comment(out[:api]["data"]["weather"], out[:weather_type], out[:time]) %></small>
+            </div>
+            <div>
+              <% out[:keys].each do |key| %>
+                <small> <%=  retriever(out[:api]["data"]["weather"], key, out[:weather_type], out[:time]) %></small>
+              <% end %>
+            </div>
             <div >
+              <button class="toggle">Reviews</button>
               <% out[:search].reviews do |review| %>
                 <small><%= review.content %> </small>
                 <small><%= review.user.first_name.capitalize %> </small>
