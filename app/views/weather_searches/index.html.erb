@@ -15,7 +15,7 @@
             <small> Searched: <%= out[:date] %> at <%= out[:exact_time] %> hrs</small>
           </div>
           <div>
-            <small> <%= image_tag "#{ url_retriever(out[:api]["data"]["weather"], out[:weather_type], out[:time])}" %></small>
+            <small> <%= image_tag "#{ url_retriever(out[:api]["data"]["weather"], out[:weather_type], out[:time])}", class: "avatar" %></small>
             <small> <%= weather_comment(out[:api]["data"]["weather"], out[:weather_type], out[:time]) %></small>
           </div>
           <div>
@@ -24,17 +24,17 @@
             <% end %>
           </div>
           <div >
-            <button class="toggle">Reviews</button>
+            <a class="toggle">See comments</a>
             <% out[:search].reviews do |review| %>
               <small><%= review.content %> </small>
               <small><%= review.user.first_name.capitalize %> </small>
             <% end %>
             <%= simple_form_for([out[:search], @review ], remote: true) do |f| %>
-              <%= f.input :content, as: :text %>
+              <%= f.input :content, as: :text, label: false %>
               <%= f.button :submit %>
             <% end %>
           </div>
-          <small> <%= link_to "delete search", weather_search_path(out[:id]), method: :delete  %></small>
+          <small> <%= link_to "delete search", weather_search_path(out[:id]), method: :delete, remote: true  %></small>
         </div>
         <% end %>
     <% else %>
