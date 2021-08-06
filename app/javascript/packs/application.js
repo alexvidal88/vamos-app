@@ -9,6 +9,7 @@ require("@rails/activestorage").start()
 require("channels")
 
 import "bootstrap";
+import {reviewForm} from "../plugins/review";
 import {weatherForm} from "../plugins/weather_type";
 import { loadDynamicBannerText } from '../plugins/typed';
 import { datePicker } from "../plugins/flatpickr";
@@ -21,5 +22,6 @@ document.addEventListener('turbolinks:load', () => {
   initMapbox();
   initAutocomplete();
   weatherForm();
+  reviewForm();
   loadDynamicBannerText();
 });
