@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_31_013308) do
+ActiveRecord::Schema.define(version: 2021_08_06_022645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,16 @@ ActiveRecord::Schema.define(version: 2021_07_31_013308) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "weather_key"
     t.string "activity_type"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "weather_search_id", null: false
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+    t.index ["weather_search_id"], name: "index_reviews_on_weather_search_id"
   end
 
   create_table "search_parameters", force: :cascade do |t|
@@ -92,6 +102,8 @@ ActiveRecord::Schema.define(version: 2021_07_31_013308) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "forecast_results", "weather_searches"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "reviews", "weather_searches"
   add_foreign_key "search_parameters", "parameters"
   add_foreign_key "search_parameters", "weather_searches"
   add_foreign_key "weather_searches", "users"

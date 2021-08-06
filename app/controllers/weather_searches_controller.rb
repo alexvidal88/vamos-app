@@ -6,6 +6,7 @@ class WeatherSearchesController < ApplicationController
   before_action :set_weather_search, only: [:show, :destroy]
 
   def index
+    @review = Review.new
     @searches = current_user.weather_searches
     @markers = @searches.geocoded.map do |search|
       {
@@ -21,7 +22,7 @@ class WeatherSearchesController < ApplicationController
       @response = Net::HTTP.get(@uri)
       @api = JSON.parse(@response)
       @keys = search.parameters.pluck(:weather_key)
-      {:api => @api, :keys => @keys, :weather_type => search.weather_type, :time => search.start_time.split(" ")[1].split(":")[0], id: search.id, :date => search.start_time.split(" ")[0], :exact_time => search.start_time.split(" ")[1]}
+      {:api => @api, :keys => @keys, :weather_type => search.weather_type, :time => search.start_time.split(" ")[1].split(":")[0], id: search.id, :date => search.start_time.split(" ")[0], :exact_time => search.start_time.split(" ")[1], :search => search}
     end
   end
 

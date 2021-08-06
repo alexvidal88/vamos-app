@@ -1,4 +1,4 @@
-const commentForm = () => {
+const reviewForm = () => {
   const btn = document.querySelectorAll(".toggle");
   if (btn) {
     btn.forEach( button => {
@@ -15,4 +15,5 @@ const commentForm = () => {
   }
 };
 
-export {commentForm};
+export {reviewForm};
+
