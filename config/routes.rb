@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :forecast_results
   resources :weather_searches do
-    resources :reviews
+    resources :reviews, only: :create
   end
   resources :search_parameters
   resources :parameters

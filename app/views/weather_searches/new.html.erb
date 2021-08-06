@@ -6,7 +6,7 @@
       <%= simple_form_for @search do |f| %>
       <div class="form-inputs">
         <%= f.input :address, label: "Location" %>
-      <%= f.input :weather_type, :collection => %w[weather marine], label: "Pick type of activity", input_html:{id:"type"}%>
+      <%= f.input :weather_type, :collection => [["weather", "land activity"], ["marine", "water activity"]], label_method: :second, value_method: :first, label: "Pick type of activity", input_html:{id:"type"}%>
       <div id="ski_wrap" class="hidden">
         <%= f.association :parameters, collection: Parameter.where(activity_type: "weather").pluck(:weather_parameter), label: "Weather parameters", input_html:{id:"ski"}%>
       </div>
