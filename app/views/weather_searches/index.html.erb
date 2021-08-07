@@ -6,52 +6,51 @@
      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
 
-
-    <% if @searches.count != 0 %>
-        <% @output.each do |out|  %>
-        <div class="search-card search-item">
-          <div>
-            <div>
-              <small><%= out[:address] %> </small>
-            </div>
-            <div>
-              <small> Searched: <%= out[:date] %> at <%= out[:exact_time] %> hrs</small>
-            </div>
-          </div>
-
-          <div class="d-flex justify-content-around">
-            <div>
-              <% out[:keys].each do |key| %>
-                <li> <%=  retriever(out[:api]["data"]["weather"], key, out[:weather_type], out[:time]) %></li>
-              <% end %>
-            </div>
-            <div>
-              <div class="d-flex justify-content-center">
-                <small> <%= image_tag "#{ url_retriever(out[:api]["data"]["weather"], out[:weather_type], out[:time])}", class: "avatar" %></small>
-              </div>
-              <div>
-                <small> <%= weather_comment(out[:api]["data"]["weather"], out[:weather_type], out[:time]) %></small>
-              </div>
-            </div>
-          </div>
-
-          <div >
-            <a class="toggle">See comments</a>
-            <% out[:search].reviews do |review| %>
-              <small><%= review.content %> </small>
-              <small><%= review.user.first_name.capitalize %> </small>
-            <% end %>
-            <%= simple_form_for([out[:search], @review ], remote: true) do |f| %>
-              <%= f.input :content, as: :text, label: false %>
-              <%= f.button :submit %>
-            <% end %>
-          </div>
-          <small> <%= link_to "delete search", weather_search_path(out[:id]), method: :delete, remote: true  %></small>
+  <% if @searches.count != 0 %>
+    <% @output.each do |out|  %>
+    <div class="search-card search-item">
+      <div>
+        <div>
+          <small><%= out[:address] %> </small>
         </div>
+        <div>
+          <small> Searched: <%= out[:date] %> at <%= out[:exact_time] %> hrs</small>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-around">
+        <div>
+          <% out[:keys].each do |key| %>
+            <li> <%=  retriever(out[:api]["data"]["weather"], key, out[:weather_type], out[:time]) %></li>
+          <% end %>
+        </div>
+        <div>
+          <div class="d-flex justify-content-center">
+            <small> <%= image_tag "#{ url_retriever(out[:api]["data"]["weather"], out[:weather_type], out[:time])}", class: "avatar" %></small>
+          </div>
+          <div>
+            <small> <%= weather_comment(out[:api]["data"]["weather"], out[:weather_type], out[:time]) %></small>
+          </div>
+        </div>
+      </div>
+
+      <div >
+        <a class="toggle">See comments</a>
+        <% out[:search].reviews do |review| %>
+          <p id="review-<%= review.id %>"><%= review.content %> </p>
+          <p><%= review.user.first_name.capitalize %> </p>
         <% end %>
-    <% else %>
-        <small> There is no searches listed yet</small>
+        <%= simple_form_for([out[:search], @review ], remote: true) do |f| %>
+          <%= f.input :content, as: :text, label: false %>
+          <%= f.button :submit %>
+        <% end %>
+      </div>
+      <small> <%= link_to "delete search", weather_search_path(out[:id]), method: :delete, remote: true  %></small>
+    </div>
     <% end %>
+  <% else %>
+      <small> There is no searches listed yet</small>
+  <% end %>
 </div>
 
 

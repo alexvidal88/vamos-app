@@ -42,21 +42,24 @@
                 <div>
                   <small> <%= weather_comment(out[:api]["data"]["weather"], out[:weather_type], out[:time]) %></small>
                 </div>
-
               </div>
             </div>
 
             <div >
               <a class="toggle">See comments</a>
-              <div id="reviews">
-                <% out[:search].user.reviews do |review| %>
-                  <p id="review-<%= review.id %>"><%= review.content %> </p>
-                  <p><%= review.user.first_name.capitalize %> </p>
-                <% end %>
-              </div>
+              <div>
+                <% out[:search].reviews.each do |review| %>
+                <p id="review-<%= review.id %>"><%= review.content %> </p>
+                <p><%= review.user.first_name.capitalize %> </p>
+              <% end %>
               <%= simple_form_for([out[:search], @review ], remote: true) do |f| %>
               <%= f.input :content, as: :text, label: false %>
               <%= f.button :submit %>
+            <% end %>
+              </div>
+
+            <% if session[:review_error]%>
+            <p><%= session[:review_error] %> </p>
             <% end %>
             </div>
           </div>
@@ -66,3 +69,13 @@
     <% end %>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
