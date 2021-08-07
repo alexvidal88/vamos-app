@@ -10,8 +10,6 @@
                     <% else %>
                       <%= image_tag "https://res.cloudinary.com/batch-588/image/upload/v1627822930/squartl_avatar_t1rfxo.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
                     <% end %>
-                  </div>
-                  <div class="text-center">
                     <% if out[:search].user == current_user %>
                     <small>You</small>
                   <% else %>
@@ -50,18 +48,24 @@
               <div>
                 <% out[:search].reviews.each do |review| %>
                   <div class="d-flex justify-content-start">
-                    <% if review.user.photo.attached?%>
-                    <%= cl_image_tag(review.user.photo.key, class: "avatar-chat dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false)%>
-                    <% else %>
-                      <%= image_tag "https://res.cloudinary.com/batch-588/image/upload/v1627822930/squartl_avatar_t1rfxo.jpg", class: "avatar-chat dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-                    <% end %>
-                    <% if review.user == current_user %>
-                    <p>You said: </p>
-                    <% else %>
-                    <p><%= review.user.first_name.capitalize %> said: </p>
-                    <% end %>
-                    <p id="review-<%= review.id %>">  <%=  review.content.capitalize %> </p>
-                    <small> at (<%= review.created_at %>) </small>
+                    <div class="d-flex chat-box">
+                      <% if review.user.photo.attached?%>
+                        <%= cl_image_tag(review.user.photo.key, class: "avatar-chat dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false)%>
+                      <% else %>
+                       <%= image_tag "https://res.cloudinary.com/batch-588/image/upload/v1627822930/squartl_avatar_t1rfxo.jpg", class: "avatar-chat dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                      <% end %>
+                      <div class="chat-box">
+                        <% if review.user == current_user %>
+                          <small>You</small>
+                        <% else %>
+                          <small><%= review.user.first_name.capitalize %></small>
+                        <% end %>
+                        <p id="review-<%= review.id %>" class="chat-card">  <%=  review.content.capitalize %> </p>
+                        <small class="date"><%= review.created_at %></small>
+                      </div>
+
+                    </div>
+
                   </div>
                 <% end %>
                 <%= simple_form_for([out[:search], @review ], remote: true) do |f| %>
