@@ -9,9 +9,10 @@
   <% if @searches.count != 0 %>
     <% @output.each do |out|  %>
     <div class="search-card search-item">
-      <div>
+      <small class="text-right"> <%= link_to "delete", weather_search_path(out[:id]), method: :delete, remote: true  %></small>
+      <div class="text-center">
         <div>
-          <small><%= out[:address] %> </small>
+          <small>Location: <%= out[:address] %> </small>
         </div>
         <div>
           <small> Searched: <%= out[:date] %> at <%= out[:exact_time] %> hrs</small>
@@ -36,16 +37,34 @@
 
       <div >
         <a class="toggle">See comments</a>
-        <% out[:search].reviews do |review| %>
-          <p id="review-<%= review.id %>"><%= review.content %> </p>
-          <p><%= review.user.first_name.capitalize %> </p>
-        <% end %>
-        <%= simple_form_for([out[:search], @review ], remote: true) do |f| %>
-          <%= f.input :content, as: :text, label: false %>
-          <%= f.button :submit %>
-        <% end %>
+          <div>
+            <% out[:search].reviews.each do |review| %>
+              <div class="d-flex justify-content-start">
+                <% if review.user.photo.attached?%>
+                    <%= cl_image_tag(review.user.photo.key, class: "avatar-chat dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false)%>
+                    <% else %>
+                      <%= image_tag "https://res.cloudinary.com/batch-588/image/upload/v1627822930/squartl_avatar_t1rfxo.jpg", class: "avatar-chat dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                    <% end %>
+                <% if review.user == current_user %>
+                  <p>You said: </p>
+                  <% else %>
+                  <p><%= review.user.first_name.capitalize %> said: </p>
+                <% end %>
+                <p id="review-<%= review.id %>">  <%=  review.content.capitalize %> </p>
+                <p> at (<%= review.created_at %>) </p>
+              </div>
+            <% end %>
+            <%= simple_form_for([out[:search], @review ], remote: true) do |f| %>
+            <%= f.input :content, as: :text, label: false %>
+            <%= f.button :submit %>
+            <% end %>
+            <% if session[:review_error]%>
+              <p><%= session[:review_error]%> </p>
+            <% end %>
+          </div>
+        </div>
+
       </div>
-      <small> <%= link_to "delete search", weather_search_path(out[:id]), method: :delete, remote: true  %></small>
     </div>
     <% end %>
   <% else %>

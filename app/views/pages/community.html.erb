@@ -7,20 +7,20 @@
                   <div>
                     <% if out[:search].user.photo.attached?%>
                     <%= cl_image_tag(out[:search].user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false)%>
-                  <% else %>
-                    <%= image_tag "https://res.cloudinary.com/batch-588/image/upload/v1627822930/squartl_avatar_t1rfxo.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-                  <% end %>
+                    <% else %>
+                      <%= image_tag "https://res.cloudinary.com/batch-588/image/upload/v1627822930/squartl_avatar_t1rfxo.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                    <% end %>
                   </div>
-                  <div>
+                  <div class="text-center">
                     <% if out[:search].user == current_user %>
-                    <small><%= out[:search].user.first_name.capitalize %> </small>
-                  <% else %>
                     <small>You</small>
+                  <% else %>
+                    <small><%= out[:search].user.first_name.capitalize %> </small>
                   <% end %>
                   </div>
                 </div>
-                <div>
-                  <div>
+                <div class="text-right" >
+                  <div >
                     <small><%= out[:address] %> </small>
                   </div>
                   <div>
@@ -29,13 +29,13 @@
                 </div>
             </div>
 
-            <div class="d-flex justify-content-around">
-              <div>
+            <div class="d-flex justify-content-around d-flex align-items-center">
+              <div >
                 <% out[:keys].each do |key| %>
                   <li> <%=  retriever(out[:api]["data"]["weather"], key, out[:weather_type], out[:time]) %></li>
                 <% end %>
               </div>
-              <div>
+              <div >
                 <div class="d-flex justify-content-center">
                   <small> <%= image_tag "#{ url_retriever(out[:api]["data"]["weather"], out[:weather_type], out[:time])}", class: "avatar" %></small>
                 </div>
@@ -49,18 +49,29 @@
               <a class="toggle">See comments</a>
               <div>
                 <% out[:search].reviews.each do |review| %>
-                <p id="review-<%= review.id %>"><%= review.content %> </p>
-                <p><%= review.user.first_name.capitalize %> </p>
-              <% end %>
-              <%= simple_form_for([out[:search], @review ], remote: true) do |f| %>
-              <%= f.input :content, as: :text, label: false %>
-              <%= f.button :submit %>
-            <% end %>
+                  <div class="d-flex justify-content-start">
+                    <% if review.user.photo.attached?%>
+                    <%= cl_image_tag(review.user.photo.key, class: "avatar-chat dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false)%>
+                    <% else %>
+                      <%= image_tag "https://res.cloudinary.com/batch-588/image/upload/v1627822930/squartl_avatar_t1rfxo.jpg", class: "avatar-chat dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                    <% end %>
+                    <% if review.user == current_user %>
+                    <p>You said: </p>
+                    <% else %>
+                    <p><%= review.user.first_name.capitalize %> said: </p>
+                    <% end %>
+                    <p id="review-<%= review.id %>">  <%=  review.content.capitalize %> </p>
+                    <small> at (<%= review.created_at %>) </small>
+                  </div>
+                <% end %>
+                <%= simple_form_for([out[:search], @review ], remote: true) do |f| %>
+                <%= f.input :content, as: :text, label: false %>
+                <%= f.button :submit %>
+                <% end %>
               </div>
-
-            <% if session[:review_error]%>
-            <p><%= session[:review_error] %> </p>
-            <% end %>
+              <% if session[:review_error]%>
+                <p><%= session[:review_error] %> </p>
+              <% end %>
             </div>
           </div>
       <% end %>
