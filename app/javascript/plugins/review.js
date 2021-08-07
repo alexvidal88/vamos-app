@@ -2,6 +2,7 @@ const reviewForm = () => {
   const btn = document.querySelectorAll(".toggle");
   if (btn) {
     btn.forEach( button => {
+      button.nextElementSibling.style.display = "none";
       button.addEventListener("click", () => {
         if (button.nextElementSibling.style.display === "none"){
             button.nextElementSibling.style.display = "block";
