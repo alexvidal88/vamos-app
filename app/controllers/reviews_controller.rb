@@ -4,10 +4,12 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.user = current_user
     @review.weather_search = @search
+    session[:review_error] = nil
     if @review.save
-      redirect_to "#{request.referrer}##{@review.id}"
+      redirect_to "#{request.referrer}#review-#{@review.id}"
     else
-      render request.referrer
+      session[:review_error] = "Review too short"
+      redirect_to request.referrer
     end
   end
 
