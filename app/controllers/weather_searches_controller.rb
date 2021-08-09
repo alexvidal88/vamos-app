@@ -11,7 +11,8 @@ class WeatherSearchesController < ApplicationController
     @markers = @searches.geocoded.map do |search|
       {
         lat: search.latitude,
-        lng: search.longitude
+        lng: search.longitude,
+        info_window: render_to_string(partial: "info_window", locals: { search: search})
       }
     end
       # spare key = 0e0a60ab61054e5a8df85413212907

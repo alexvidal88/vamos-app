@@ -1,11 +1,11 @@
 import Typed from 'typed.js';
 
 const loadDynamicBannerText = () => {
-  const element = document.getElementById('banner-typed-text');
+  const element = document.querySelector('.typed-text');
   if (element) {
-    new Typed('#banner-typed-text', {
+    new Typed('.typed-text', {
     strings: ["Manage your outdoor activities in a better way"],
-    typeSpeed: 50,
+    typeSpeed: 70,
     loop: true
     });
   };

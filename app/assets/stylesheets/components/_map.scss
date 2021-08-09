@@ -1,8 +1,16 @@
 #map {
   position: center;
   margin: 5px;
-  padding: 0;
+  padding-right: 10px;
   border-radius: 5px;
 }
 
+.mapboxgl-ctrl-geocoder--input {
+  width: 50px;
+  padding: 0px;
+}
+
+.mapboxgl-canvas {
+  width: 90%;
+}
 
