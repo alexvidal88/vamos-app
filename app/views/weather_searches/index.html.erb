@@ -39,21 +39,25 @@
         <a class="toggle">See comments</a>
           <div>
             <% out[:search].reviews.each do |review| %>
-              <div class="d-flex justify-content-start">
-                <% if review.user.photo.attached?%>
-                    <%= cl_image_tag(review.user.photo.key, class: "avatar-chat dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false)%>
-                    <% else %>
-                      <%= image_tag "https://res.cloudinary.com/batch-588/image/upload/v1627822930/squartl_avatar_t1rfxo.jpg", class: "avatar-chat dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-                    <% end %>
-                <% if review.user == current_user %>
-                  <p>You said: </p>
-                  <% else %>
-                  <p><%= review.user.first_name.capitalize %> said: </p>
+                  <div class="d-flex justify-content-start">
+                    <div class="d-flex chat-box">
+                      <% if review.user.photo.attached?%>
+                        <%= cl_image_tag(review.user.photo.key, class: "avatar-chat dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false)%>
+                      <% else %>
+                       <%= image_tag "https://res.cloudinary.com/batch-588/image/upload/v1627822930/squartl_avatar_t1rfxo.jpg", class: "avatar-chat dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                      <% end %>
+                      <div class="chat-box">
+                        <% if review.user == current_user %>
+                          <small>You</small>
+                        <% else %>
+                          <small><%= review.user.first_name.capitalize %></small>
+                        <% end %>
+                        <p id="review-<%= review.id %>" class="chat-card">  <%=  review.content.capitalize %> </p>
+                        <small class="date"><%= review.created_at %></small>
+                      </div>
+                    </div>
+                  </div>
                 <% end %>
-                <p id="review-<%= review.id %>">  <%=  review.content.capitalize %> </p>
-                <p> at (<%= review.created_at %>) </p>
-              </div>
-            <% end %>
             <%= simple_form_for([out[:search], @review ], remote: true) do |f| %>
             <%= f.input :content, as: :text, label: false %>
             <%= f.button :submit %>
@@ -62,15 +66,15 @@
               <p><%= session[:review_error]%> </p>
             <% end %>
           </div>
-        </div>
-
       </div>
     </div>
     <% end %>
+</div>
+
   <% else %>
       <small> There is no searches listed yet</small>
   <% end %>
-</div>
+
 
 
 
