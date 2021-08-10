@@ -1,8 +1,10 @@
 #map {
   position: center;
-  margin: 5px;
-  padding-right: 10px;
-  border-radius: 5px;
+  margin-top: 0;
+  /*margin: 5px;*/
+  /*padding: 10px;*/
+
+  text-align: center;
 }
 
 .mapboxgl-ctrl-geocoder--input {
@@ -12,5 +14,6 @@
 
 .mapboxgl-canvas {
   width: 90%;
+  padding: 5px;
 }
 

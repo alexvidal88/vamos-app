@@ -2,7 +2,7 @@
     <% if @searches.count != 0  %>
         <% @output.each do |out|  %>
           <div class="search-card search-item">
-            <div class="d-flex justify-content-between">
+            <div class="first-section-community d-flex justify-content-between">
                 <div>
                   <div>
                     <% if out[:search].user.photo.attached?%>
@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-            <div class="d-flex justify-content-around d-flex align-items-center">
+            <div class="second-section d-flex justify-content-around d-flex align-items-center">
               <div >
                 <% out[:keys].each do |key| %>
                   <li> <%=  retriever(out[:api]["data"]["weather"], key, out[:weather_type], out[:time]) %></li>
@@ -43,7 +43,7 @@
               </div>
             </div>
 
-            <div >
+            <div class="third-section">
               <a class="toggle">See comments</a>
               <div>
                 <% out[:search].reviews.each do |review| %>
