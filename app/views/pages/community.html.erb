@@ -84,7 +84,9 @@
           </div>
       <% end %>
     <% else %>
-        <small> There is no searches listed yet</small>
+      <div class="index-button">
+        <%= link_to 'Make your first search', '/weather_searches/new', class:"index-button-text"%>
+      </div>
     <% end %>
   </div>
 </div>
