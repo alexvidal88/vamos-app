@@ -8,7 +8,7 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to "#{request.referrer}#review-#{@review.id}"
     else
-      session[:review_error] = "Review too short"
+      session[:review_error] = "Comment at least three characters"
       redirect_to request.referrer
     end
   end
