@@ -8,7 +8,7 @@
                     <% if out[:search].user.photo.attached?%>
                     <%= cl_image_tag(out[:search].user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false)%>
                     <% else %>
-                      <%= image_tag "https://res.cloudinary.com/batch-588/image/upload/v1627822930/squartl_avatar_t1rfxo.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                      <%= image_tag "https://www.seekpng.com/png/full/428-4287240_no-avatar-user-circle-icon-png.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
                     <% end %>
                     <% if out[:search].user == current_user %>
                     <small>You</small>
@@ -44,7 +44,7 @@
             </div>
 
             <div class="third-section">
-              <a class="toggle">See comments</a>
+              <a class="toggle" style="text-decoration: none;">See comments</a>
               <div>
                 <% out[:search].reviews.each do |review| %>
                   <div class="d-flex justify-content-start">
@@ -52,7 +52,7 @@
                       <% if review.user.photo.attached?%>
                         <%= cl_image_tag(review.user.photo.key, class: "avatar-chat dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false)%>
                       <% else %>
-                       <%= image_tag "https://res.cloudinary.com/batch-588/image/upload/v1627822930/squartl_avatar_t1rfxo.jpg", class: "avatar-chat dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                       <%= image_tag "https://www.seekpng.com/png/full/428-4287240_no-avatar-user-circle-icon-png.png", class: "avatar-chat dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
                       <% end %>
                       <div class="chat-box">
                         <% if review.user == current_user %>
@@ -70,12 +70,16 @@
                 <% end %>
                 <%= simple_form_for([out[:search], @review ], remote: true) do |f| %>
                 <%= f.input :content, as: :text, label: false %>
-                <%= f.button :submit %>
+
+                <div class="form-actions text-center m-auto">
+                  <%= f.submit "Submit comment", class: 'comment-button btn btn-primary' %>
+                </div>
                 <% end %>
-              </div>
-              <% if session[:review_error]%>
-                <p><%= session[:review_error] %> </p>
+                <% if session[:review_error]%>
+                <p class="error-msg"><%= session[:review_error] %> </p>
               <% end %>
+              </div>
+
             </div>
           </div>
       <% end %>
