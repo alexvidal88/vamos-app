@@ -5,7 +5,7 @@
 .weather-search {
   background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url('https://images.unsplash.com/photo-1586022045497-31fcf76fa6cc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8aGlraW5nfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80');
   background-size: cover;
-  /*height: 100vh;*/
+  height: 100vh;
   background-repeat: no-repeat;
   background-attachment: scroll;
   padding-bottom: 50px;
@@ -16,6 +16,21 @@
   align-items: center;*/
 }
 
+.first-section {
+  padding-bottom: 15px;
+}
+
+.first-section-community {
+  padding: 10px;
+}
+
+.second-section{
+  padding-bottom: 10px;
+}
+
+.third-section {
+  padding: 5px;
+}
 
 .search-card {
   color:  white;

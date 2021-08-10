@@ -9,8 +9,8 @@
   <% if @searches.count != 0 %>
     <% @output.each do |out|  %>
     <div class="search-card search-item">
-      <small class="text-right"> <%= link_to "delete", weather_search_path(out[:id]), method: :delete, remote: true  %></small>
-      <div class="text-center">
+      <small class="text-right"> <%= link_to "delete", weather_search_path(out[:id]), method: :delete, remote: true, data: {confirm: "Are you sure you want to delete this search?"}  %></small>
+      <div class="first-section text-center">
         <div>
           <small>Location: <%= out[:address] %> </small>
         </div>
@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <div class="d-flex justify-content-around">
+      <div class="second-section d-flex justify-content-around">
         <div>
           <% out[:keys].each do |key| %>
             <li> <%=  retriever(out[:api]["data"]["weather"], key, out[:weather_type], out[:time]) %></li>
@@ -35,7 +35,7 @@
         </div>
       </div>
 
-      <div >
+      <div class="third-section">
         <a class="toggle">See comments</a>
           <div>
             <% out[:search].reviews.each do |review| %>
