@@ -1,97 +1,94 @@
-<div class="weather-search">
-    <% if @searches.count != 0  %>
-        <% @output.each do |out|  %>
-          <div class="search-card search-item">
-            <div class="first-section-community d-flex justify-content-between">
-                <div>
-                  <div>
-                    <% if out[:search].user.photo.attached?%>
-                    <%= cl_image_tag(out[:search].user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false)%>
-                    <% else %>
-                      <%= image_tag "https://www.seekpng.com/png/full/428-4287240_no-avatar-user-circle-icon-png.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-                    <% end %>
-                    <% if out[:search].user == current_user %>
-                    <small>You</small>
-                  <% else %>
-                    <small><%= out[:search].user.first_name.capitalize %> </small>
-                  <% end %>
-                  </div>
-                </div>
-                <div class="text-right" >
-                  <div >
-                    <small><%= out[:address] %> </small>
-                  </div>
-                  <div>
-                    <small> Searched: <%= out[:date] %> at <%= out[:exact_time] %> hrs</small>
-                  </div>
-                </div>
-            </div>
-
-            <div class="second-section d-flex justify-content-around d-flex align-items-center">
-              <div >
-                <% out[:keys].each do |key| %>
-                  <li> <%=  retriever(out[:api]["data"]["weather"], key, out[:weather_type], out[:time]) %></li>
-                <% end %>
-              </div>
-              <div >
-                <div class="d-flex justify-content-center">
-                  <small> <%= image_tag "#{ url_retriever(out[:api]["data"]["weather"], out[:weather_type], out[:time])}", class: "avatar" %></small>
-                </div>
-                <div>
-                  <small> <%= weather_comment(out[:api]["data"]["weather"], out[:weather_type], out[:time]) %></small>
-                </div>
-              </div>
-            </div>
-
-            <div class="third-section">
-              <a class="toggle" style="text-decoration: none;">See comments</a>
+<% if @searches.count != 0  %>
+  <div class="community-weather-search">
+      <% @output.each do |out|  %>
+        <div class="search-card search-item">
+          <div class="first-section-community d-flex justify-content-between">
               <div>
-                <% out[:search].reviews.each do |review| %>
-                  <div class="d-flex justify-content-start">
-                    <div class="d-flex chat-box">
-                      <% if review.user.photo.attached?%>
-                        <%= cl_image_tag(review.user.photo.key, class: "avatar-chat dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false)%>
-                      <% else %>
-                       <%= image_tag "https://www.seekpng.com/png/full/428-4287240_no-avatar-user-circle-icon-png.png", class: "avatar-chat dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-                      <% end %>
-                      <div class="chat-box">
-                        <% if review.user == current_user %>
-                          <small>You</small>
-                        <% else %>
-                          <small><%= review.user.first_name.capitalize %></small>
-                        <% end %>
-                        <p id="review-<%= review.id %>" class="chat-card">  <%=  review.content.capitalize %> </p>
-                        <small class="date"><%= review.created_at %></small>
-                      </div>
-
-                    </div>
-
-                  </div>
+                <div>
+                  <% if out[:search].user.photo.attached?%>
+                  <%= cl_image_tag(out[:search].user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false)%>
+                  <% else %>
+                    <%= image_tag "https://www.seekpng.com/png/full/428-4287240_no-avatar-user-circle-icon-png.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                  <% end %>
+                  <% if out[:search].user == current_user %>
+                  <small>You</small>
+                <% else %>
+                  <small><%= out[:search].user.first_name.capitalize %> </small>
                 <% end %>
-                <%= simple_form_for([out[:search], @review ], remote: true) do |f| %>
-                <%= f.input :content, as: :text, label: false %>
-
-                <div class="form-actions text-center m-auto">
-                  <%= f.submit "Submit comment", class: 'comment-button btn btn-primary' %>
                 </div>
-                <% end %>
-                <% if session[:review_error]%>
-                <p class="error-msg"><%= session[:review_error] %> </p>
-              <% end %>
               </div>
+              <div class="text-right" >
+                <div >
+                  <small><%= out[:address] %> </small>
+                </div>
+                <div>
+                  <small> Searched: <%= out[:date] %> at <%= out[:exact_time] %> hrs</small>
+                </div>
+              </div>
+          </div>
 
+          <div class="second-section d-flex justify-content-around d-flex align-items-center">
+            <div >
+              <% out[:keys].each do |key| %>
+                <li> <%=  retriever(out[:api]["data"]["weather"], key, out[:weather_type], out[:time]) %></li>
+              <% end %>
+            </div>
+            <div >
+              <div class="d-flex justify-content-center">
+                <small> <%= image_tag "#{ url_retriever(out[:api]["data"]["weather"], out[:weather_type], out[:time])}", class: "avatar" %></small>
+              </div>
+              <div>
+                <small> <%= weather_comment(out[:api]["data"]["weather"], out[:weather_type], out[:time]) %></small>
+              </div>
             </div>
           </div>
-      <% end %>
-    <% else %>
-      <div class="index-button">
-        <%= link_to 'Make your first search', '/weather_searches/new', class:"index-button-text"%>
+
+          <div class="third-section">
+            <a class="toggle" style="text-decoration: none;">See comments</a>
+            <div>
+              <% out[:search].reviews.each do |review| %>
+                <div class="d-flex justify-content-start">
+                  <div class="d-flex chat-box">
+                    <% if review.user.photo.attached?%>
+                      <%= cl_image_tag(review.user.photo.key, class: "avatar-chat dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false)%>
+                    <% else %>
+                     <%= image_tag "https://www.seekpng.com/png/full/428-4287240_no-avatar-user-circle-icon-png.png", class: "avatar-chat dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                    <% end %>
+                    <div class="chat-box">
+                      <% if review.user == current_user %>
+                        <small>You</small>
+                      <% else %>
+                        <small><%= review.user.first_name.capitalize %></small>
+                      <% end %>
+                      <p id="review-<%= review.id %>" class="chat-card">  <%=  review.content.capitalize %> </p>
+                      <small class="date"><%= review.created_at %></small>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+              <%= simple_form_for([out[:search], @review ], remote: true) do |f| %>
+              <%= f.input :content, as: :text, label: false %>
+
+              <div class="form-actions text-center m-auto">
+                <%= f.submit "Submit comment", class: 'comment-button btn btn-primary' %>
+              </div>
+              <% end %>
+              <% if session[:review_error]%>
+                <p class="error-msg"><%= session[:review_error] %> </p>
+              <% end %>
+            </div>
+          </div>
       </div>
     <% end %>
   </div>
-</div>
 
-
+<% else %>
+  <div class="empty-search">
+    <div class="index-button">
+    <%= link_to 'Make your first search', '/weather_searches/new', class:"index-button-text"%>
+    </div>
+  </div>
+<% end %>
 
 
 
