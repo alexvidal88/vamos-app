@@ -7,7 +7,19 @@
   padding: 8px;
   align-items: center;
   display: flex;
+  z-index: 99;
 }
+
+.navbar-lewagon.community{
+  position: fixed;
+  top: 0;
+}
+
+.community-weather-search, .dashboard-weather-search{
+  margin-top: 50px;
+}
+
+
 
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
