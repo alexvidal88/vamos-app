@@ -31,7 +31,7 @@
           <div class="d-flex justify-content-center">
             <small> <%= image_tag "#{ url_retriever(out[:api]["data"]["weather"], out[:weather_type], out[:time])}", class: "avatar" %></small>
           </div>
-          <div>
+          <div class="text-center">
             <small> <%= weather_comment(out[:api]["data"]["weather"], out[:weather_type], out[:time]) %></small>
           </div>
         </div>

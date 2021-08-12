@@ -5,11 +5,7 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder';
 
 // var MapboxDirections = require('@mapbox/mapbox-gl-directions');
 
-var directions = new MapboxDirections({
-  accessToken: 'pk.eyJ1IjoiYWxleHZpZGFsODgiLCJhIjoiY2txcnUzYzk3MmtlMjJwcXR2c3JhcHY3NSJ9.3fvSQfD1JaDk8vsFY7kODg',
-  unit: 'metric',
-  profile: 'mapbox/cycling'
-});
+
 
 const buildMap = (mapElement) => {
   mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
@@ -47,8 +43,12 @@ const initMapbox = () => {
     addMarkersToMap(map, markers);
     fitMapToMarkers(map, markers);
     // map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,
-      // mapboxgl: mapboxgl }));
-    // console.log(direction);
+    // mapboxgl: mapboxgl }));
+    var directions = new MapboxDirections({
+      accessToken: 'pk.eyJ1IjoiYWxleHZpZGFsODgiLCJhIjoiY2txcnUzYzk3MmtlMjJwcXR2c3JhcHY3NSJ9.3fvSQfD1JaDk8vsFY7kODg',
+      unit: 'metric',
+      profile: 'mapbox/cycling'
+      });
     map.addControl(directions, 'top-left');
   }
 };
