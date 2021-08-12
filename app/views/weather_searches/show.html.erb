@@ -1,31 +1,34 @@
 <div class="weather-search banner">
   <div class="guess-card">
-      <div class="text-center">
+      <div class="show-first-section text-center">
         <div>
-          <small>Location: <%= @search.address %> </small>
+          <i class="fas fa-map-marker-alt"></i>
+          <small> <%= @search.address %> </small>
         </div>
         <div>
-          <small> Searched: <%= @output[:date] %> at <%= @output[:exact_time] %> hrs</small>
+          <i class="far fa-clock"></i>
+          <small> <%= @output[:date] %> at <%= @output[:exact_time] %> hrs</small>
         </div>
       </div>
 
-      <div class="d-flex justify-content-around">
-        <div>
+      <div class="show-second-section d-flex justify-content-around">
+        <div class="weather-img">
+          <div class="d-flex justify-content-center">
+            <small> <%= image_tag "#{ url_retriever(@output[:api]["data"]["weather"], @output[:weather_type], @output[:time])}", class: "show-avatar" %></small>
+          </div>
+          <div class="text-center">
+            <small> <%= weather_comment(@output[:api]["data"]["weather"], @output[:weather_type], @output[:time]) %></small>
+          </div>
+        </div>
+        <div class="params-section">
           <% @output[:keys].each do |key| %>
             <li> <%=  retriever(@output[:api]["data"]["weather"], key, @output[:weather_type], @output[:time]) %></li>
           <% end %>
         </div>
-        <div>
-          <div class="d-flex justify-content-center">
-            <small> <%= image_tag "#{ url_retriever(@output[:api]["data"]["weather"], @output[:weather_type], @output[:time])}", class: "avatar" %></small>
-          </div>
-          <div>
-            <small> <%= weather_comment(@output[:api]["data"]["weather"], @output[:weather_type], @output[:time]) %></small>
-          </div>
-        </div>
+
       </div>
-      <div class="text-center" >
-        <%= link_to "make a new search", new_weather_search_path  %>
+      <div class="text-center m-auto btn btn-primary">
+        <%= link_to "New search", new_weather_search_path %>
       </div>
   </div>
 </div>

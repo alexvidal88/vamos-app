@@ -3,26 +3,30 @@
       <% @output.each do |out|  %>
         <div class="search-card search-item">
           <div class="first-section-community d-flex justify-content-between">
-              <div>
+              <div class="text-center">
                 <div>
                   <% if out[:search].user.photo.attached?%>
                   <%= cl_image_tag(out[:search].user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false)%>
                   <% else %>
                     <%= image_tag "https://www.seekpng.com/png/full/428-4287240_no-avatar-user-circle-icon-png.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
                   <% end %>
+                </div>
+                <div>
                   <% if out[:search].user == current_user %>
-                  <small>You</small>
-                <% else %>
-                  <small><%= out[:search].user.first_name.capitalize %> </small>
-                <% end %>
+                    <small>You</small>
+                  <% else %>
+                    <small><%= out[:search].user.first_name.capitalize %> </small>
+                  <% end %>
                 </div>
               </div>
               <div class="text-right" >
                 <div >
+                  <i class="fas fa-map-marker-alt"></i>
                   <small><%= out[:address] %> </small>
                 </div>
                 <div>
-                  <small> Searched: <%= out[:date] %> at <%= out[:exact_time] %> hrs</small>
+                  <i class="far fa-clock"></i>
+                  <small>  <%= out[:date] %> at <%= out[:exact_time] %> hrs</small>
                 </div>
               </div>
           </div>

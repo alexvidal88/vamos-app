@@ -11,10 +11,12 @@
       <small class="text-right"> <%= link_to "delete", weather_search_path(out[:id]), method: :delete, remote: true, data: {confirm: "Are you sure you want to delete this search?"}  %></small>
       <div class="first-section text-center">
         <div>
-          <small>Location: <%= out[:address] %> </small>
+          <i class="fas fa-map-marker-alt"></i>
+          <small> <%= out[:address] %> </small>
         </div>
         <div>
-          <small> Searched: <%= out[:date] %> at <%= out[:exact_time] %> hrs</small>
+          <i class="far fa-clock"></i>
+          <small> <%= out[:date] %> at <%= out[:exact_time] %> hrs</small>
         </div>
       </div>
 
