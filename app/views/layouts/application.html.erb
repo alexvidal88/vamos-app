@@ -7,6 +7,7 @@
 
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css" type="text/css">
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -18,7 +19,9 @@
   </head>
 
   <body>
-    <%= render "shared/navbar" %>
+    <%= render "shared/navbar", sticky: action_name == "community" || (action_name == "index" && controller_name == "weather_searches") %>
+
+
     <%#= render 'shared/flashes' %>
     <p class="alert"><%= alert %></p>
     <%= yield %>

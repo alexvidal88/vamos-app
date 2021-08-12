@@ -1,4 +1,6 @@
 <% if @searches.count != 0 %>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+
 <div class="dashboard-weather-search">
     <div class="search-item" id="map"
        style="width: 100%; height: 250px;"
@@ -19,7 +21,6 @@
           <small> <%= out[:date] %> at <%= out[:exact_time] %> hrs</small>
         </div>
       </div>
-
       <div class="second-section d-flex justify-content-around align-items-center">
         <div>
           <% out[:keys].each do |key| %>
@@ -37,7 +38,7 @@
       </div>
 
       <div class="third-section">
-        <a class="toggle" style="text-decoration: none; color: white; font-weight: bold;">Comments</a>
+        <a class="toggle" style="text-decoration: none; color: white; font-weight: bold;">Hide Comments</a>
           <div>
             <% out[:search].reviews.each do |review| %>
                   <div class="d-flex justify-content-start">
