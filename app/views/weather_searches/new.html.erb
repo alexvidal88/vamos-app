@@ -5,21 +5,26 @@
         <h1>Customize your search</h1>
       <%= simple_form_for @search do |f| %>
       <div class="form-inputs">
-        <%= f.input :address, label: "Location" %>
-      <%= f.input :weather_type, :collection => [["weather", "land activity"], ["marine", "water activity"]], label_method: :second, value_method: :first, label: "Pick type of activity", input_html:{id:"type"}%>
+        <h5>Where do you want to go?</h5>
+        <%= f.input :address, label: false%>
+        <h5>Pick the type of activity</h5>
+        <%= f.input :weather_type, :collection => [["weather", "land activity"], ["marine", "water activity"]], label_method: :second, value_method: :first, label: false, input_html:{id:"type"}%>
       <div id="ski_wrap" class="hidden">
-        <%= f.association :parameters, collection: Parameter.where(activity_type: "weather").pluck(:weather_parameter), label: "Weather parameters", input_html:{id:"ski"}%>
+        <h5>Select weather parameters</h5>
+        <%= f.association :parameters, collection: Parameter.where(activity_type: "weather").pluck(:weather_parameter), label: false, input_html:{id:"ski"}%>
       </div>
       <div id="marine_wrap" class="hidden">
-        <%= f.association :parameters, collection: Parameter.where(activity_type: "marine").pluck(:weather_parameter), label: "Marine parameters", input_html:{id:"marine"}%>
+        <h5>Select weather parameters</h5>
+        <%= f.association :parameters, collection: Parameter.where(activity_type: "marine").pluck(:weather_parameter), label: false, input_html:{id:"marine"}%>
       </div>
       </div>
       <div class= "sign" id='weather-search-times' data-unavailable="<%= @search.unavailable_times.to_json %>">
-        <%= f.input :start_time, as: :string, type: :text, label: "Pick a date" %>
+        <h5>When would you like to do it?</h5>
+        <%= f.input :start_time, as: :string, type: :text, label: false %>
         <%#= f.input :end_time, as: :string, type: :text %>
       </div>
       <div class="form-actions text-center m-auto">
-        <%= f.submit "search", class: 'btn btn-primary' %>
+        <%= f.submit "go for it!", class: 'btn btn-primary' %>
       </div>
       <% end %>
     </div>

@@ -32,9 +32,12 @@
           </div>
         </div>
       <% else %>
-        <li class="nav-item">
-          <%= link_to "Home", root_path, class: "nav-link" %>
-        </li>
+        <div class="home-link">
+          <i class="fas fa-home text-center"></i>
+          <li class="nav-item">
+          <%= link_to "Home", root_path, class: "home" %>
+          </li>
+        </div>
       <% end %>
     </ul>
   </div>
