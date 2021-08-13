@@ -1,8 +1,11 @@
 module WeatherSearchesHelper
   def retriever(api, key, weather_type, time)
     if weather_type == "weather"
+      if key == "tempC" && ("#{time}00").to_i.to_s == api[0]["hourly"][time.to_i]["time"]
 
-      if key == "uvIndex" && ("#{time}00").to_i.to_s == api[0]["hourly"][time.to_i]["time"]
+        "Temperature: #{api[0]["hourly"][time.to_i][key]} °C"
+
+      elsif key == "uvIndex" && ("#{time}00").to_i.to_s == api[0]["hourly"][time.to_i]["time"]
 
         "UV Index: #{api[0]["hourly"][time.to_i][key]} "
 
@@ -35,7 +38,7 @@ module WeatherSearchesHelper
 
       if key == "tempC" && ("#{time}00").to_i.to_s == api[0]["hourly"][time.to_i]["time"]
 
-        "Temperature: #{api[0]["hourly"][time.to_i][key]} C"
+        "Temperature: #{api[0]["hourly"][time.to_i][key]} °C"
 
       elsif key == "windspeedKmph" && ("#{time}00").to_i.to_s == api[0]["hourly"][time.to_i]["time"]
 
@@ -59,7 +62,7 @@ module WeatherSearchesHelper
 
       elsif key == "waterTemp_C" && ("#{time}00").to_i.to_s == api[0]["hourly"][time.to_i]["time"]
 
-        "Water Temperature: #{api[0]["hourly"][time.to_i][key]} C"
+        "Water Temperature: #{api[0]["hourly"][time.to_i][key]} °C"
 
       elsif key == "uvIndex" && ("#{time}00").to_i.to_s == api[0]["hourly"][time.to_i]["time"]
 

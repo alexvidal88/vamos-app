@@ -1,6 +1,7 @@
-<% if @searches.count != 0  %>
-  <div class="community-weather-search">
-      <% @output.each do |out|  %>
+
+<div class="community-weather-search">
+  <% if @searches.count != 0  %>
+    <% @output.each do |out|  %>
         <div class="search-card search-item">
           <div class="first-section-community d-flex justify-content-between">
               <div class="text-center">
@@ -84,15 +85,20 @@
           </div>
       </div>
     <% end %>
-  </div>
 
-<% else %>
-  <div class="empty-search">
-    <div class="index-button">
-    <%= link_to 'Make your first search', '/weather_searches/new', class:"index-button-text"%>
+  <% else %>
+    <div class="banner">
+      <div class="banner-content text-center">
+        <p> <span class="typed-text-community"></span></p>
+        <div class="index-button">
+            <%= link_to 'Make your first search', '/weather_searches/new', class:"index-button-text"%>
+        </div>
+      </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
+
+
 
 
 

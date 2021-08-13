@@ -19,11 +19,11 @@
   </head>
 
   <body>
+
     <%= render "shared/navbar", sticky: action_name == "community" || (action_name == "index" && controller_name == "weather_searches") %>
-
-
     <%#= render 'shared/flashes' %>
     <p class="alert"><%= alert %></p>
     <%= yield %>
+
   </body>
 </html>
