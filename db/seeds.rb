@@ -12,6 +12,7 @@
 # end
 
 ## land parameters
+Parameter.create(weather_parameter: "Temperature", activity_type: "weather", weather_key: "tempC")
 Parameter.create(weather_parameter: "UV Index", activity_type: "weather", weather_key: "uvIndex")
 Parameter.create(weather_parameter: "Chance of rain", activity_type: "weather", weather_key: "chanceofrain")
 Parameter.create(weather_parameter: "Wind speed",activity_type: "weather", weather_key: "windspeedKmph")
