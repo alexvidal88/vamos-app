@@ -1,6 +1,7 @@
 module WeatherSearchesHelper
   def retriever(api, key, weather_type, time)
     if weather_type == "weather"
+
       if key == "tempC" && ("#{time}00").to_i.to_s == api[0]["hourly"][time.to_i]["time"]
 
         "Temperature: #{api[0]["hourly"][time.to_i][key]} °C"
