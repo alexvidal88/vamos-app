@@ -15,11 +15,9 @@ class WeatherSearchesController < ApplicationController
         info_window: render_to_string(partial: "info_window", locals: { search: search})
       }
     end
-      # key alexr.vidalh@gmail.com = bd3331a32f9e48a9bd834355212707
-      # key alexvidal88@outlook.com = 0e0a60ab61054e5a8df85413212907
     @output = @searches.map do |search|
       @date = search.start_time.split(" ")[0]
-      @url = "https://api.worldweatheronline.com/premium/v1/#{search.weather_type}.ashx?key=0e0a60ab61054e5a8df85413212907&q=#{search.latitude},#{search.longitude}&format=json&tp=1&date=#{@date}"
+      @url = "https://api.worldweatheronline.com/premium/v1/#{search.weather_type}.ashx?key=d3fb6463c0154700a1440230212509&q=#{search.latitude},#{search.longitude}&format=json&tp=1&date=#{@date}"
       @uri = URI(@url)
       @response = Net::HTTP.get(@uri)
       @api = JSON.parse(@response)
