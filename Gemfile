@@ -6,7 +6,6 @@ ruby '2.6.6'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.0.4'
 # Use postgresql as the database for Active Record
-gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
@@ -21,6 +20,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 gem 'cloudinary', '~> 1.16.0'
+gem 'pg'
 gem 'autoprefixer-rails', '10.2.5'
 gem 'font-awesome-sass', '~> 5.6.1'
 gem 'devise'
