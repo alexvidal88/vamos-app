@@ -73,20 +73,20 @@ module WeatherSearchesHelper
     end
   end
 
-  def url_retriever(api, weather_type, time)
-    if weather_type == "weather"
+  def url_retriever(api, time)
+    # if weather_type == "weather"
       api[0]["hourly"][time.to_i]["weatherIconUrl"][0]["value"]
-    else
-      api[0]["hourly"][time.to_i]["weatherIconUrl"][0]["value"]
-    end
+    # else
+    #   api[0]["hourly"][time.to_i]["weatherIconUrl"][0]["value"]
+    # end
   end
 
-  def weather_comment(api, weather_type, time)
-    if weather_type == "weather"
+  def weather_comment(api, time)
+    # if weather_type == "weather"
       api[0]["hourly"][time.to_i]["weatherDesc"][0]["value"]
-    else
-      api[0]["hourly"][time.to_i]["weatherDesc"][0]["value"]
-    end
+    # else
+    #   api[0]["hourly"][time.to_i]["weatherDesc"][0]["value"]
+    # end
   end
 
 end

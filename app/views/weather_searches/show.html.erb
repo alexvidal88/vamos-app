@@ -14,10 +14,10 @@
       <div class="show-second-section d-flex justify-content-around">
         <div class="weather-img">
           <div class="d-flex justify-content-center">
-            <small> <%= image_tag "#{ url_retriever(@output[:api]["data"]["weather"], @output[:weather_type], @output[:time])}", class: "show-avatar" %></small>
+            <small> <%= image_tag "#{ url_retriever(@output[:api]["data"]["weather"], @output[:time])}", class: "show-avatar" %></small>
           </div>
           <div class="text-center">
-            <small> <%= weather_comment(@output[:api]["data"]["weather"], @output[:weather_type], @output[:time]) %></small>
+            <small> <%= weather_comment(@output[:api]["data"]["weather"], @output[:time]) %></small>
           </div>
         </div>
         <div class="params-section">
