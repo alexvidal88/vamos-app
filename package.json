@@ -14,12 +14,10 @@
     "places.js": "^1.19.0",
     "popper.js": "^1.16.1",
     "turbolinks": "^5.2.0",
-    "typed.js": "^2.0.12",
-    "webpack": "^5.0.0"
+    "typed.js": "^2.0.12"
   },
   "version": "0.1.0",
   "devDependencies": {
-    "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.7.2"
   }
 }
