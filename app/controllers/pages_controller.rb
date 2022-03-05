@@ -9,7 +9,7 @@ class PagesController < ApplicationController
     @searches = WeatherSearch.where.not(user_id: nil)
     @output = @searches.map do |search|
       @date = search.start_time.split(" ")[0]
-      @url = "https://api.worldweatheronline.com/premium/v1/#{search.weather_type}.ashx?key=11a411eb80ed40289a851210220502&q=#{search.latitude},#{search.longitude}&format=json&tp=1&date=#{@date}"
+      @url = "https://api.worldweatheronline.com/premium/v1/#{search.weather_type}.ashx?key=af8543662a0946e89f163923220503&q=#{search.latitude},#{search.longitude}&format=json&tp=1&date=#{@date}"
       @uri = URI(@url)
       @response = Net::HTTP.get(@uri)
       @api = JSON.parse(@response)
